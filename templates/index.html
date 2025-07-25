@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Select Test Sample and Post</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #f6f8fa; margin: 0; padding: 0; }
+        .container { max-width: 650px; margin: 60px auto; background: #fff; border-radius: 18px; box-shadow: 0 2px 12px #0001; padding: 36px; }
+        h2 { text-align: center; color: #232946; }
+        label, select { display: block; width: 100%; margin-top: 18px; }
+        select { font-size: 1rem; padding: 10px; border-radius: 8px; border: 1px solid #ccc; }
+        .tab-row {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            margin-top: 30px;
+            gap: 14px;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            padding-bottom: 12px;
+        }
+        .tab-btn {
+            background: #e5e8fa;
+            color: #232946;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 18px 18px 0 0;
+            font-size: 1.07rem;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+            outline: none;
+            min-width: 82px;
+            flex: 0 0 auto;
+        }
+        .tab-btn.active, .tab-btn:hover {
+            background: #232946;
+            color: #fff;
+        }
+        .hidden { display: none; }
+        .prompt { text-align: center; margin: 24px 0 12px; font-size: 1.07rem; color: #232946d0; }
+        @media (max-width: 900px) {
+            .container { max-width: 97vw; }
+            .tab-btn { min-width: 65px; font-size: 1rem; padding: 10px 14px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Select Test Sample & Post</h2>
+        <form id="selectionForm" method="post" action="/submit">
+            <label for="set_number">Step 1: Choose a Test Sample (Set)</label>
+            <select id="set_number" name="set_number" required>
+                <option value="" selected disabled>Select Set</option>
+                {% for i in range(1, 10) %}
+                    <option value="{{i}}">Set {{i}}</option>
+                {% endfor %}
+            </select>
+
+            <div id="postSelection" class="hidden">
+                <div class="prompt">Step 2: Select a Post</div>
+                <div class="tab-row">
+                    {% for i in range(1, 13) %}
+                        <button type="button" class="tab-btn" data-post="{{i}}">Post {{i}}</button>
+                    {% endfor %}
+                </div>
+            </div>
+            <!-- Hidden input for post -->
+            <input type="hidden" name="post_number" id="post_number" />
+            <!-- Hidden submit, triggered from JS -->
+            <button type="submit" id="submitBtn" class="hidden"></button>
+        </form>
+    </div>
+    <script>
+        const setSelect = document.getElementById('set_number');
+        const postSelection = document.getElementById('postSelection');
+        const postButtons = document.querySelectorAll('.tab-btn');
+        const postInput = document.getElementById('post_number');
+        const form = document.getElementById('selectionForm');
+        let selectedTab = null;
+
+        setSelect.addEventListener('change', function() {
+            postSelection.classList.remove('hidden');
+            if (selectedTab) selectedTab.classList.remove('active');
+            postInput.value = '';
+        });
+
+        postButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Deselect previous
+                if (selectedTab) selectedTab.classList.remove('active');
+                // Select current
+                btn.classList.add('active');
+                selectedTab = btn;
+                // Set value and submit form
+                postInput.value = btn.getAttribute('data-post');
+                form.submit();
+            });
+        });
+    </script>
+</body>
+</html>
