@@ -8,7 +8,10 @@ import traceback
 
 import pandas as pd
 
-from social_post_model.core.chains.social_post_chains import update_social_post_chain
+from social_post_model.core.chains.social_post_chains import (
+    update_social_post_chain,
+    validate_query_chain,
+)
 
 router = APIRouter()
 templates = Jinja2Templates(directory="templates")
@@ -121,14 +124,27 @@ async def update_post(
         # Get the specific data row
         display_data = data[set_number - 1]
 
+        # Validate the user query first
+        check_query = await validate_query_chain(user_message)
+        print(f"Validation score: {check_query['score']}")
+        print(f"Validation reason: {check_query['reason']}")
+
+        # If validation fails (score is 0), return the reason without updating
+        if check_query["score"] == 0:
+            return {
+                "success": False,
+                "validation_failed": True,
+                "reason": check_query["reason"],
+                "error": "Query validation failed",
+            }
+
+        # Continue with the update process if validation passes
         # Clean and parse social post data
         social_post_str = clean_quotes(display_data["Social Post (9V)"])
         social_post = ast.literal_eval(social_post_str)
         specific_post = social_post["posts"][post_number - 1]
 
         print(f"User message: {user_message}")
-        print(f"Selected text: {selected_text}")
-        print(f"Field type: {field_type}")
 
         # Get additional context data
         brand_guide_str = clean_quotes(display_data["BrandGuide"])

@@ -973,76 +973,107 @@
         }
 
         // Updated sendToAI function with backend integration
-        async function sendToAI() {
-            const input = document.getElementById('ai-input');
-            const message = input.value.trim();
+// Updated sendToAI function with validation handling
+async function sendToAI() {
+    const input = document.getElementById('ai-input');
+    const message = input.value.trim();
+    
+    if (!message) return;
+    
+    const sendBtn = document.getElementById('ai-send-btn');
+    const responseDiv = document.getElementById('ai-response');
+    
+    // Show loading state
+    sendBtn.disabled = true;
+    sendBtn.textContent = 'Processing...';
+    responseDiv.style.display = 'block';
+    responseDiv.innerHTML = '<div class="ai-loading">AI is processing your request...</div>';
+    
+    try {
+        // Determine what field to update based on where text was selected
+        const fieldType = determineFieldType();
+        
+        // Send update request to backend
+        const formData = new FormData();
+        formData.append('set_number', {{ set_number }});
+        formData.append('post_number', {{ post_number }});
+        formData.append('selected_text', selectedText);
+        formData.append('user_message', message);
+        formData.append('field_type', fieldType);
+        
+        const response = await fetch('/update_post', {
+            method: 'POST',
+            body: formData
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+            // Update the UI with new content
+            updateUIField(result.field_type, result.updated_value);
             
-            if (!message) return;
+            responseDiv.innerHTML = `
+                <div style="color: #34d399;">
+                    ✅ Successfully updated! The ${result.field_type.replace('_', ' ')} has been refreshed with your changes.
+                </div>
+            `;
             
-            const sendBtn = document.getElementById('ai-send-btn');
-            const responseDiv = document.getElementById('ai-response');
+            // Close AI panel after 2 seconds
+            setTimeout(() => {
+                closeAI();
+            }, 2000);
             
-            // Show loading state
-            sendBtn.disabled = true;
-            sendBtn.textContent = 'Processing...';
-            responseDiv.style.display = 'block';
-            responseDiv.innerHTML = '<div class="ai-loading">AI is updating your content...</div>';
-            
-            try {
-                // Determine what field to update based on where text was selected
-                const fieldType = determineFieldType();
-                
-                // Send update request to backend
-                const formData = new FormData();
-                formData.append('set_number', {{ set_number }});
-                formData.append('post_number', {{ post_number }});
-                formData.append('selected_text', selectedText);
-                formData.append('user_message', message);
-                formData.append('field_type', fieldType);
-                
-                const response = await fetch('/update_post', {
-                    method: 'POST',
-                    body: formData
-                });
-                
-                const result = await response.json();
-                
-                if (result.success) {
-                    // Update the UI with new content
-                    updateUIField(result.field_type, result.updated_value);
-                    
-                    responseDiv.innerHTML = `
-                        <div style="color: #34d399;">
-                            ✅ Successfully updated! The ${result.field_type.replace('_', ' ')} has been refreshed with your changes.
-                        </div>
-                    `;
-                    
-                    // Close AI panel after 2 seconds
-                    setTimeout(() => {
-                        closeAI();
-                    }, 2000);
-                    
-                } else {
-                    responseDiv.innerHTML = `
-                        <div style="color: #ef4444;">
-                            ❌ Error: ${result.error || 'Failed to update content'}
-                        </div>
-                    `;
-                }
-                
-            } catch (error) {
-                console.error('Update error:', error);
-                responseDiv.innerHTML = `
-                    <div style="color: #ef4444;">
-                        ❌ Network error. Please try again.
+        } else if (result.validation_failed) {
+            // Handle validation failure - show the reason without updating UI
+            responseDiv.innerHTML = `
+                <div style="color: #fbbf24; background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 8px; border: 1px solid rgba(251, 191, 36, 0.2);">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                        <span style="font-size: 1.2em;">⚠️</span>
+                        <strong>Request Not Processed</strong>
                     </div>
-                `;
-            } finally {
-                sendBtn.disabled = false;
-                sendBtn.textContent = 'Send';
-                input.value = '';
-            }
+                    <div style="line-height: 1.5; color: #fcd34d;">
+                        ${result.reason || 'Your request could not be processed due to validation constraints.'}
+                    </div>
+                </div>
+            `;
+            
+            // Don't close the AI panel automatically for validation failures
+            // User can read the reason and try again
+            
+        } else {
+            // Handle other errors
+            responseDiv.innerHTML = `
+                <div style="color: #ef4444; background: rgba(239, 68, 68, 0.1); padding: 1rem; border-radius: 8px; border: 1px solid rgba(239, 68, 68, 0.2);">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                        <span style="font-size: 1.2em;">❌</span>
+                        <strong>Error</strong>
+                    </div>
+                    <div style="line-height: 1.5; color: #fca5a5;">
+                        ${result.error || 'Failed to update content. Please try again.'}
+                    </div>
+                </div>
+            `;
         }
+        
+    } catch (error) {
+        console.error('Update error:', error);
+        responseDiv.innerHTML = `
+            <div style="color: #ef4444; background: rgba(239, 68, 68, 0.1); padding: 1rem; border-radius: 8px; border: 1px solid rgba(239, 68, 68, 0.2);">
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                    <span style="font-size: 1.2em;">🌐</span>
+                    <strong>Network Error</strong>
+                </div>
+                <div style="line-height: 1.5; color: #fca5a5;">
+                    Connection failed. Please check your internet and try again.
+                </div>
+            </div>
+        `;
+    } finally {
+        sendBtn.disabled = false;
+        sendBtn.textContent = 'Send';
+        input.value = '';
+    }
+}
 
         // Determine which field to update based on selected text location
         function determineFieldType() {

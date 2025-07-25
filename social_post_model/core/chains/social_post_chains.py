@@ -1,8 +1,12 @@
 from langchain_openai import ChatOpenAI
 from pydantic import BaseModel, Field
 from dotenv import load_dotenv
-from social_post_model.core.prompts.social_post_prompts import social_post_update_prompt
+from social_post_model.core.prompts.social_post_prompts import (
+    social_post_update_prompt,
+    query_checker_prompt,
+)
 from typing import Any
+import json
 
 load_dotenv()
 
@@ -10,6 +14,16 @@ load_dotenv()
 class SocialPostUpdateContent(BaseModel):
     updated_text: str = Field(
         ..., description="Here is the updated text of the social post"
+    )
+
+
+class QueryValidator(BaseModel):
+    score: int = Field(
+        ..., description="Score 0 if query is invalid and 1 if it is valid"
+    )
+    reason: str = Field(
+        default="",
+        description=' Empty string ""  if score is 1 and query is valid and enter a proper reason why if the query is invalid and score is 0',
     )
 
 
@@ -38,3 +52,12 @@ async def update_social_post_chain(
     }
     response = await update_chain.ainvoke(input_data)
     return response.updated_text
+
+
+async def validate_query_chain(query):
+    llmo = llm.with_structured_output(QueryValidator)
+    query_chain = query_checker_prompt | llmo
+    input_data = {"search_query_or_request": query}
+    response = await query_chain.ainvoke(input_data)
+    output = json.loads(response.model_dump_json())
+    return output
