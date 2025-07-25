@@ -209,6 +209,7 @@
             user-select: text;
             position: relative;
             overflow: hidden;
+            transition: all 0.3s ease;
         }
         
         .post-category::before {
@@ -252,6 +253,11 @@
             bottom: 0;
             background: linear-gradient(45deg, transparent 30%, rgba(59, 130, 246, 0.03) 50%, transparent 70%);
             animation: shimmer 4s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
         }
 
         .post-text {
@@ -611,12 +617,14 @@
             gap: 8px;
             color: #60a5fa;
             font-size: 0.9rem;
+            justify-content: center;
+            padding: 1rem;
         }
 
         .ai-loading::after {
             content: '';
-            width: 16px;
-            height: 16px;
+            width: 20px;
+            height: 20px;
             border: 2px solid rgba(96, 165, 250, 0.3);
             border-top: 2px solid #60a5fa;
             border-radius: 50%;
@@ -655,6 +663,18 @@
             transform: translateY(-8px);
             box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
         }
+
+        .field-update-success {
+            animation: successPulse 0.6s ease-in-out;
+        }
+
+        @keyframes successPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); opacity: 0.8; }
+            100% { transform: scale(1); }
+        }
+
+        @media (max-width: 1200px) {
             .main-container {
                 grid-template-columns: 1fr;
                 gap: 1rem;
@@ -756,7 +776,7 @@
                 <div class="post-header">
                     <div class="section-label">📂 Post Category</div>
                     <div class="post-category" id="post-category">{{ specific_post['Category'] }}</div>
-                    <h1 class="post-title">Social Media Post Analysis</h1>
+                    <h1 class="post-title"></h1>
                 </div>
 
                 <div class="post-content-section">
@@ -952,6 +972,7 @@
             hideSelectionTooltip();
         }
 
+        // Updated sendToAI function with backend integration
         async function sendToAI() {
             const input = document.getElementById('ai-input');
             const message = input.value.trim();
@@ -963,18 +984,59 @@
             
             // Show loading state
             sendBtn.disabled = true;
-            sendBtn.textContent = 'Sending...';
+            sendBtn.textContent = 'Processing...';
             responseDiv.style.display = 'block';
-            responseDiv.innerHTML = '<div class="ai-loading">AI is thinking...</div>';
+            responseDiv.innerHTML = '<div class="ai-loading">AI is updating your content...</div>';
             
             try {
-                // Simulate AI response (replace with actual API call)
-                await new Promise(resolve => setTimeout(resolve, 2000));
+                // Determine what field to update based on where text was selected
+                const fieldType = determineFieldType();
                 
-                const contextualResponse = generateAIResponse(message, selectedText);
-                responseDiv.innerHTML = contextualResponse;
+                // Send update request to backend
+                const formData = new FormData();
+                formData.append('set_number', {{ set_number }});
+                formData.append('post_number', {{ post_number }});
+                formData.append('selected_text', selectedText);
+                formData.append('user_message', message);
+                formData.append('field_type', fieldType);
+                
+                const response = await fetch('/update_post', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Update the UI with new content
+                    updateUIField(result.field_type, result.updated_value);
+                    
+                    responseDiv.innerHTML = `
+                        <div style="color: #34d399;">
+                            ✅ Successfully updated! The ${result.field_type.replace('_', ' ')} has been refreshed with your changes.
+                        </div>
+                    `;
+                    
+                    // Close AI panel after 2 seconds
+                    setTimeout(() => {
+                        closeAI();
+                    }, 2000);
+                    
+                } else {
+                    responseDiv.innerHTML = `
+                        <div style="color: #ef4444;">
+                            ❌ Error: ${result.error || 'Failed to update content'}
+                        </div>
+                    `;
+                }
+                
             } catch (error) {
-                responseDiv.innerHTML = '<div style="color: #ef4444;">Sorry, there was an error processing your request. Please try again.</div>';
+                console.error('Update error:', error);
+                responseDiv.innerHTML = `
+                    <div style="color: #ef4444;">
+                        ❌ Network error. Please try again.
+                    </div>
+                `;
             } finally {
                 sendBtn.disabled = false;
                 sendBtn.textContent = 'Send';
@@ -982,20 +1044,52 @@
             }
         }
 
-        function generateAIResponse(question, context) {
-            // Simulate contextual AI responses based on selected text
-            const responses = {
-                default: `Based on the selected text "${context}", here are some insights:\n\n• This content appears to be part of a social media marketing strategy\n• The tone is professional yet approachable\n• Consider A/B testing different variations of this message\n• The timing and audience targeting are crucial for engagement`,
-                strategy: `For social media strategy regarding "${context}":\n\n• Focus on audience engagement through storytelling\n• Use relevant hashtags to increase visibility\n• Consider the optimal posting time for your target demographic\n• Monitor performance metrics to refine future content`,
-                improvement: `To improve "${context}":\n\n• Add more emotional appeal to connect with the audience\n• Include a clear call-to-action\n• Consider using more visual elements\n• Test different headline variations for better engagement`
-            };
-            
-            if (question.toLowerCase().includes('improve') || question.toLowerCase().includes('better')) {
-                return responses.improvement;
-            } else if (question.toLowerCase().includes('strategy') || question.toLowerCase().includes('marketing')) {
-                return responses.strategy;
-            } else {
-                return responses.default;
+        // Determine which field to update based on selected text location
+        function determineFieldType() {
+            const selection = window.getSelection();
+            if (selection.anchorNode) {
+                // Check if selection was from post category
+                if (document.getElementById('post-category').contains(selection.anchorNode)) {
+                    return 'category';
+                }
+                // Check if selection was from post text
+                else if (document.getElementById('post-text').contains(selection.anchorNode)) {  
+                    return 'post_text';
+                }
+            }
+            // Default to post_text
+            return 'post_text';
+        }
+
+        // Update the UI field with new content
+        function updateUIField(fieldType, newValue) {
+            if (fieldType === 'category') {
+                const categoryElement = document.getElementById('post-category');
+                categoryElement.textContent = newValue;
+                
+                // Add update animation
+                categoryElement.style.transform = 'scale(1.05)';
+                categoryElement.style.background = 'linear-gradient(135deg, #34d399, #10b981)';
+                
+                setTimeout(() => {
+                    categoryElement.style.transform = 'scale(1)';
+                    categoryElement.style.background = 'linear-gradient(135deg, #3b82f6, #8b5cf6)';
+                }, 500);
+                
+            } else if (fieldType === 'post_text') {
+                const postTextElement = document.getElementById('post-text');
+                postTextElement.textContent = newValue;
+                
+                // Add update animation
+                postTextElement.style.background = 'rgba(52, 211, 153, 0.2)';
+                postTextElement.style.borderLeftColor = '#34d399';
+                postTextElement.style.transform = 'translateY(-2px)';
+                
+                setTimeout(() => {
+                    postTextElement.style.background = 'rgba(0, 0, 0, 0.2)';
+                    postTextElement.style.borderLeftColor = '#3b82f6';
+                    postTextElement.style.transform = 'translateY(0)';
+                }, 1000);
             }
         }
 
