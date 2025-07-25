@@ -190,6 +190,9 @@ Here is the main query which you need to focus on and based on that update the s
 <query>
 {query}
 </query>
+
+Be very careful with the text to change. Change only what the user  user has dragged basically the text to change and dont change everything if the user has not specifically mentioned
+in the query or dragged everything .Be very careful with that.
 """
 
 social_post_update_prompt = ChatPromptTemplate.from_messages([
@@ -219,7 +222,7 @@ Here are invalid things
 Gibberish/Nonsensical Content Requests:
 Random Character Strings:
 
-"Add 'xkjfhg34@#$%asdf' to the Hero section"
+"Add 'xkjfhg34@#$sdf' to the Hero section"
 Reason: This is gibberish text with no meaningful content value
 "Replace the H1 heading with 'zxcvbnm123!@#qwerty'"
 Reason: Random character string that provides no business value
