@@ -328,7 +328,7 @@ Here are invalid things
 Gibberish/Nonsensical Content Requests:
 Random Character Strings:
 
-"Add 'xkjfhg34@#$%asdf' to the Hero section"
+"Add 'xkjfhg34@#$sdf' to the Hero section"
 Reason: This is gibberish text with no meaningful content value
 "Replace the H1 heading with 'zxcvbnm123!@#qwerty'"
 Reason: Random character string that provides no business value
