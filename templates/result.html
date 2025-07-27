@@ -193,6 +193,32 @@
             border-radius: 1px;
         }
 
+        .editable-field {
+            cursor: text;
+            user-select: text;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .editable-field:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+        }
+
+        .editable-field::after {
+            content: '✏️';
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            font-size: 12px;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .editable-field:hover::after {
+            opacity: 0.7;
+        }
+
         .post-category {
             display: inline-block;
             background: linear-gradient(135deg, #3b82f6, #8b5cf6);
@@ -205,8 +231,6 @@
             letter-spacing: 0.05em;
             margin-bottom: 0;
             box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
-            cursor: text;
-            user-select: text;
             position: relative;
             overflow: hidden;
             transition: all 0.3s ease;
@@ -271,8 +295,6 @@
             background: rgba(0, 0, 0, 0.2);
             border-radius: 12px;
             border-left: 4px solid #3b82f6;
-            cursor: text;
-            user-select: text;
             transition: all 0.3s ease;
             margin: 0;
         }
@@ -329,6 +351,11 @@
         .caption-text {
             color: #fbbf24;
             font-weight: 600;
+        }
+
+        .objective-text {
+            color: #a78bfa;
+            line-height: 1.6;
         }
 
         .image-recommendations {
@@ -527,6 +554,19 @@
         .ai-close:hover {
             background: rgba(255, 255, 255, 0.1);
             color: #e4e4e7;
+        }
+
+        .field-info {
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            color: #c4b5fd;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .selected-text {
@@ -775,20 +815,20 @@
             <main class="post-section">
                 <div class="post-header">
                     <div class="section-label">📂 Post Category</div>
-                    <div class="post-category" id="post-category">{{ specific_post['Category'] }}</div>
+                    <div class="post-category editable-field" id="post-category" data-field="category">{{ specific_post['Category'] }}</div>
                     <h1 class="post-title"></h1>
                 </div>
 
                 <div class="post-content-section">
                     <div class="section-label">📝 Post Content</div>
-                    <div class="post-text" id="post-text">{{ specific_post['Post'] }}</div>
+                    <div class="post-text editable-field" id="post-text" data-field="post_text">{{ specific_post['Post'] }}</div>
                 </div>
 
                 <div class="post-meta">
                     <div class="meta-grid">
                         <div class="meta-item">
                             <div class="meta-label">Objective</div>
-                            <div class="meta-value">{{ specific_post['Objective'] }}</div>
+                            <div class="meta-value objective-text editable-field" id="objective" data-field="objective">{{ specific_post['Objective'] }}</div>
                         </div>
                         
                         <div class="meta-item">
@@ -803,7 +843,7 @@
                         
                         <div class="meta-item">
                             <div class="meta-label">Caption</div>
-                            <div class="meta-value caption-text">{{ specific_post['Caption'] }}</div>
+                            <div class="meta-value caption-text editable-field" id="caption" data-field="caption">{{ specific_post['Caption'] }}</div>
                         </div>
                         
                         {% if specific_post['Image Recommendations'] %}
@@ -888,6 +928,11 @@
                 <button class="ai-close" onclick="closeAI()">×</button>
             </div>
             
+            <div class="field-info" id="field-info" style="display: none;">
+                <span>🎯</span>
+                <span id="field-info-text"></span>
+            </div>
+            
             <div class="selected-text" id="selected-text-display" style="display: none;">
                 <div class="selected-label">Selected Text:</div>
                 <div id="selected-text-content"></div>
@@ -941,6 +986,31 @@
         let activePanel = null;
         let selectedText = '';
         let lastSelection = null;
+        let currentFieldType = '';
+
+        // Field type mappings with user-friendly names
+        const fieldMappings = {
+            'category': {
+                name: 'Post Category',
+                description: 'Editing the main category classification for this social media post',
+                icon: '📂'
+            },
+            'post_text': {
+                name: 'Post Content',
+                description: 'Editing the main text content that will be published on social media',
+                icon: '📝'
+            },
+            'objective': {
+                name: 'Post Objective',
+                description: 'Editing the strategic goal and purpose of this social media post',
+                icon: '🎯'
+            },
+            'caption': {
+                name: 'Post Caption',
+                description: 'Editing the short caption or tagline for this social media post',
+                icon: '💬'
+            }
+        };
 
         // Text Selection and AI Assistant Functions
         function showSelectionTooltip(x, y) {
@@ -955,12 +1025,35 @@
             tooltip.classList.remove('show');
         }
 
-        function openAI(text) {
+        function openAI(text, fieldType) {
             selectedText = text;
+            currentFieldType = fieldType;
+            
+            // Update field info
+            const fieldInfo = fieldMappings[fieldType];
+            if (fieldInfo) {
+                document.getElementById('field-info-text').innerHTML = `
+                    ${fieldInfo.icon} Editing <strong>${fieldInfo.name}</strong> - ${fieldInfo.description}
+                `;
+                document.getElementById('field-info').style.display = 'flex';
+            }
+            
+            // Update selected text display
             document.getElementById('selected-text-content').textContent = text;
             document.getElementById('selected-text-display').style.display = 'block';
+            
+            // Update placeholder based on field type
+            const input = document.getElementById('ai-input');
+            const placeholders = {
+                'category': 'How would you like to modify this category? (e.g., "Make it more engaging" or "Change to a different category type")',
+                'post_text': 'How would you like to improve this post content? (e.g., "Make it more compelling" or "Add more call-to-action")',
+                'objective': 'How should this objective be updated? (e.g., "Make it more specific" or "Focus on engagement")',
+                'caption': 'How would you like to change this caption? (e.g., "Make it catchier" or "Add emojis")'
+            };
+            input.placeholder = placeholders[fieldType] || 'How would you like to modify this content?';
+            
             document.getElementById('ai-assistant').classList.add('active');
-            document.getElementById('ai-input').focus();
+            input.focus();
             hideSelectionTooltip();
         }
 
@@ -968,163 +1061,165 @@
             document.getElementById('ai-assistant').classList.remove('active');
             document.getElementById('ai-response').style.display = 'none';
             document.getElementById('ai-input').value = '';
+            document.getElementById('field-info').style.display = 'none';
             selectedText = '';
+            currentFieldType = '';
             hideSelectionTooltip();
         }
 
-        // Updated sendToAI function with backend integration
-// Updated sendToAI function with validation handling
-async function sendToAI() {
-    const input = document.getElementById('ai-input');
-    const message = input.value.trim();
-    
-    if (!message) return;
-    
-    const sendBtn = document.getElementById('ai-send-btn');
-    const responseDiv = document.getElementById('ai-response');
-    
-    // Show loading state
-    sendBtn.disabled = true;
-    sendBtn.textContent = 'Processing...';
-    responseDiv.style.display = 'block';
-    responseDiv.innerHTML = '<div class="ai-loading">AI is processing your request...</div>';
-    
-    try {
-        // Determine what field to update based on where text was selected
-        const fieldType = determineFieldType();
-        
-        // Send update request to backend
-        const formData = new FormData();
-        formData.append('set_number', {{ set_number }});
-        formData.append('post_number', {{ post_number }});
-        formData.append('selected_text', selectedText);
-        formData.append('user_message', message);
-        formData.append('field_type', fieldType);
-        
-        const response = await fetch('/update_post', {
-            method: 'POST',
-            body: formData
-        });
-        
-        const result = await response.json();
-        
-        if (result.success) {
-            // Update the UI with new content
-            updateUIField(result.field_type, result.updated_value);
+        // Enhanced sendToAI function with field-specific handling
+        async function sendToAI() {
+            const input = document.getElementById('ai-input');
+            const message = input.value.trim();
             
-            responseDiv.innerHTML = `
-                <div style="color: #34d399;">
-                    ✅ Successfully updated! The ${result.field_type.replace('_', ' ')} has been refreshed with your changes.
-                </div>
-            `;
+            if (!message) return;
             
-            // Close AI panel after 2 seconds
-            setTimeout(() => {
-                closeAI();
-            }, 2000);
+            const sendBtn = document.getElementById('ai-send-btn');
+            const responseDiv = document.getElementById('ai-response');
             
-        } else if (result.validation_failed) {
-            // Handle validation failure - show the reason without updating UI
-            responseDiv.innerHTML = `
-                <div style="color: #fbbf24; background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 8px; border: 1px solid rgba(251, 191, 36, 0.2);">
-                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-                        <span style="font-size: 1.2em;">⚠️</span>
-                        <strong>Request Not Processed</strong>
+            // Show loading state
+            sendBtn.disabled = true;
+            sendBtn.textContent = 'Processing...';
+            responseDiv.style.display = 'block';
+            responseDiv.innerHTML = '<div class="ai-loading">AI is processing your request...</div>';
+            
+            try {
+                // Send update request to backend
+                const formData = new FormData();
+                formData.append('set_number', {{ set_number }});
+                formData.append('post_number', {{ post_number }});
+                formData.append('selected_text', selectedText);
+                formData.append('user_message', message);
+                formData.append('field_type', currentFieldType);
+                
+                const response = await fetch('/update_post', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Update the UI with new content
+                    updateUIField(result.field_type, result.updated_value);
+                    
+                    const fieldInfo = fieldMappings[result.field_type];
+                    responseDiv.innerHTML = `
+                        <div style="color: #34d399;">
+                            ✅ Successfully updated! The <strong>${fieldInfo.name}</strong> has been refreshed with your changes.
+                        </div>
+                    `;
+                    
+                    // Close AI panel after 2 seconds
+                    setTimeout(() => {
+                        closeAI();
+                    }, 2000);
+                    
+                } else if (result.validation_failed) {
+                    // Handle validation failure
+                    responseDiv.innerHTML = `
+                        <div style="color: #fbbf24; background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 8px; border: 1px solid rgba(251, 191, 36, 0.2);">
+                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                                <span style="font-size: 1.2em;">⚠️</span>
+                                <strong>Request Not Processed</strong>
+                            </div>
+                            <div style="line-height: 1.5; color: #fcd34d;">
+                                ${result.reason || 'Your request could not be processed due to validation constraints.'}
+                            </div>
+                        </div>
+                    `;
+                    
+                } else {
+                    // Handle other errors
+                    responseDiv.innerHTML = `
+                        <div style="color: #ef4444; background: rgba(239, 68, 68, 0.1); padding: 1rem; border-radius: 8px; border: 1px solid rgba(239, 68, 68, 0.2);">
+                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                                <span style="font-size: 1.2em;">❌</span>
+                                <strong>Error</strong>
+                            </div>
+                            <div style="line-height: 1.5; color: #fca5a5;">
+                                ${result.error || 'Failed to update content. Please try again.'}
+                            </div>
+                        </div>
+                    `;
+                }
+                
+            } catch (error) {
+                console.error('Update error:', error);
+                responseDiv.innerHTML = `
+                    <div style="color: #ef4444; background: rgba(239, 68, 68, 0.1); padding: 1rem; border-radius: 8px; border: 1px solid rgba(239, 68, 68, 0.2);">
+                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                            <span style="font-size: 1.2em;">🌐</span>
+                            <strong>Network Error</strong>
+                        </div>
+                        <div style="line-height: 1.5; color: #fca5a5;">
+                            Connection failed. Please check your internet and try again.
+                        </div>
                     </div>
-                    <div style="line-height: 1.5; color: #fcd34d;">
-                        ${result.reason || 'Your request could not be processed due to validation constraints.'}
-                    </div>
-                </div>
-            `;
-            
-            // Don't close the AI panel automatically for validation failures
-            // User can read the reason and try again
-            
-        } else {
-            // Handle other errors
-            responseDiv.innerHTML = `
-                <div style="color: #ef4444; background: rgba(239, 68, 68, 0.1); padding: 1rem; border-radius: 8px; border: 1px solid rgba(239, 68, 68, 0.2);">
-                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-                        <span style="font-size: 1.2em;">❌</span>
-                        <strong>Error</strong>
-                    </div>
-                    <div style="line-height: 1.5; color: #fca5a5;">
-                        ${result.error || 'Failed to update content. Please try again.'}
-                    </div>
-                </div>
-            `;
+                `;
+            } finally {
+                sendBtn.disabled = false;
+                sendBtn.textContent = 'Send';
+                input.value = '';
+            }
         }
-        
-    } catch (error) {
-        console.error('Update error:', error);
-        responseDiv.innerHTML = `
-            <div style="color: #ef4444; background: rgba(239, 68, 68, 0.1); padding: 1rem; border-radius: 8px; border: 1px solid rgba(239, 68, 68, 0.2);">
-                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-                    <span style="font-size: 1.2em;">🌐</span>
-                    <strong>Network Error</strong>
-                </div>
-                <div style="line-height: 1.5; color: #fca5a5;">
-                    Connection failed. Please check your internet and try again.
-                </div>
-            </div>
-        `;
-    } finally {
-        sendBtn.disabled = false;
-        sendBtn.textContent = 'Send';
-        input.value = '';
-    }
-}
 
         // Determine which field to update based on selected text location
         function determineFieldType() {
             const selection = window.getSelection();
             if (selection.anchorNode) {
-                // Check if selection was from post category
-                if (document.getElementById('post-category').contains(selection.anchorNode)) {
-                    return 'category';
-                }
-                // Check if selection was from post text
-                else if (document.getElementById('post-text').contains(selection.anchorNode)) {  
-                    return 'post_text';
+                const editable = selection.anchorNode.parentElement.closest('.editable-field');
+                if (editable) {
+                    return editable.getAttribute('data-field') || 'post_text';
                 }
             }
-            // Default to post_text
             return 'post_text';
         }
 
-        // Update the UI field with new content
+        // Update the UI field with new content and animations
         function updateUIField(fieldType, newValue) {
+            const fieldSelectors = {
+                'category': '#post-category',
+                'post_text': '#post-text',
+                'objective': '#objective',
+                'caption': '#caption'
+            };
+            
+            const element = document.querySelector(fieldSelectors[fieldType]);
+            if (!element) return;
+            
+            // Update content
+            element.textContent = newValue;
+            
+            // Add success animation
+            element.style.transition = 'all 0.5s ease';
+            element.style.transform = 'scale(1.02)';
+            element.style.background = 'rgba(52, 211, 153, 0.2)';
+            
             if (fieldType === 'category') {
-                const categoryElement = document.getElementById('post-category');
-                categoryElement.textContent = newValue;
-                
-                // Add update animation
-                categoryElement.style.transform = 'scale(1.05)';
-                categoryElement.style.background = 'linear-gradient(135deg, #34d399, #10b981)';
-                
-                setTimeout(() => {
-                    categoryElement.style.transform = 'scale(1)';
-                    categoryElement.style.background = 'linear-gradient(135deg, #3b82f6, #8b5cf6)';
-                }, 500);
-                
+                element.style.background = 'linear-gradient(135deg, #34d399, #10b981)';
             } else if (fieldType === 'post_text') {
-                const postTextElement = document.getElementById('post-text');
-                postTextElement.textContent = newValue;
-                
-                // Add update animation
-                postTextElement.style.background = 'rgba(52, 211, 153, 0.2)';
-                postTextElement.style.borderLeftColor = '#34d399';
-                postTextElement.style.transform = 'translateY(-2px)';
-                
-                setTimeout(() => {
-                    postTextElement.style.background = 'rgba(0, 0, 0, 0.2)';
-                    postTextElement.style.borderLeftColor = '#3b82f6';
-                    postTextElement.style.transform = 'translateY(0)';
-                }, 1000);
+                element.style.borderLeftColor = '#34d399';
+                element.style.boxShadow = '0 8px 25px rgba(52, 211, 153, 0.3)';
             }
+            
+            // Reset styles after animation
+            setTimeout(() => {
+                element.style.transform = 'scale(1)';
+                
+                if (fieldType === 'category') {
+                    element.style.background = 'linear-gradient(135deg, #3b82f6, #8b5cf6)';
+                } else if (fieldType === 'post_text') {
+                    element.style.background = 'rgba(0, 0, 0, 0.2)';
+                    element.style.borderLeftColor = '#3b82f6';
+                    element.style.boxShadow = '0 8px 25px rgba(59, 130, 246, 0.2)';
+                } else {
+                    element.style.background = '';
+                }
+            }, 1000);
         }
 
-        // Event Listeners for Text Selection
+        // Enhanced event listeners for text selection
         document.addEventListener('mouseup', function(e) {
             const selection = window.getSelection();
             const selectedText = selection.toString().trim();
@@ -1134,13 +1229,17 @@ async function sendToAI() {
                 const rect = range.getBoundingClientRect();
                 const target = e.target;
                 
-                // Only show tooltip for post category and post text
-                if (target.closest('#post-category') || target.closest('#post-text')) {
+                // Check if selection is from an editable field
+                const editableField = target.closest('.editable-field');
+                if (editableField) {
                     showSelectionTooltip(
                         rect.left + (rect.width / 2) - 40,
                         rect.top + window.scrollY
                     );
-                    lastSelection = selectedText;
+                    lastSelection = {
+                        text: selectedText,
+                        fieldType: editableField.getAttribute('data-field')
+                    };
                 }
             } else {
                 hideSelectionTooltip();
@@ -1153,10 +1252,10 @@ async function sendToAI() {
             }
         });
 
-        // Tooltip click handler
+        // Enhanced tooltip click handler
         document.getElementById('selection-tooltip').addEventListener('click', function() {
             if (lastSelection) {
-                openAI(lastSelection);
+                openAI(lastSelection.text, lastSelection.fieldType);
             }
         });
 

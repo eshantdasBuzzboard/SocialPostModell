@@ -52,7 +52,7 @@ Here is the section which are going to focus
 Now before changing anything make sure you follow these guidelines. Guidelines are very important . 
 Here are the guidelines
 <guidelines>
-# Post Content and Category Guidelines
+# Post Content, Category, Caption, and Objective Guidelines
 
 ## Post Content Requirements
 
@@ -168,6 +168,105 @@ Endows, Swift, Pleasurable/Pleasure, Avail, Outlook, Top-most/topmost, Resplende
 - Must reflect the actual content and purpose of the post
 - Categories should help organize content themes for strategic posting
 
+## Caption Guidelines
+
+### Caption Length and Structure
+- **Character limit**: 3-5 words maximum
+- **Format**: Sentence case (first word capitalized, rest lowercase unless proper nouns)
+- **Punctuation**: Must end with a period
+- **Style**: Clean, concise, and descriptive
+
+### Caption Content Requirements
+1. **Descriptive Focus**: Caption should summarize the main theme or action of the post
+2. **Brand Alignment**: Must reflect the brand voice and tone
+3. **Clarity**: Should be immediately understandable without context
+4. **Relevance**: Must directly relate to the post content and image
+
+### Caption Formatting Rules
+- No emojis or special characters
+- No hashtags in captions
+- No branded terminology unless essential
+- Avoid industry jargon
+- Use simple, everyday language
+
+### Caption Examples
+**Good Captions:**
+- "Fresh market finds."
+- "Team training day."
+- "Customer success story."
+- "New service launch."
+- "Behind the scenes."
+
+**Bad Captions:**
+- "AMAZING RESULTS!!!"
+- "Check this out 🔥"
+- "Top-notch service delivery"
+- "Revolutionizing the industry"
+
+### Caption Uniqueness Requirements
+- No repeated captions across the post set
+- Each caption must be unique even for similar post types
+- Vary descriptive words and phrases
+- Consider different angles of the same topic
+
+## Objective Guidelines
+
+### Objective Structure and Format
+- **Length**: 10-50 words maximum
+- **Clarity**: Must clearly state the post's purpose and expected outcome
+- **Specificity**: Should be specific to the individual post, not generic
+- **Measurability**: Include implied metrics or outcomes where possible
+
+### Objective Content Requirements
+1. **Purpose Clarity**: Clearly state what the post aims to achieve
+2. **Audience Focus**: Specify the target audience or their needs
+3. **Business Alignment**: Connect to broader business goals
+4. **Action Orientation**: Include what action or response is expected
+
+### Objective Categories and Examples
+
+#### Educational Content Objectives
+- "Educate homebuyers about the mortgage pre-approval process to build trust and position as expert advisor"
+- "Share seasonal home maintenance tips to demonstrate ongoing value and encourage service bookings"
+
+#### Promotional Content Objectives
+- "Showcase new service offering to drive inquiries and highlight competitive advantages"
+- "Promote limited-time offer to create urgency and generate immediate leads"
+
+#### Social Proof Objectives
+- "Share customer success story to build credibility and encourage similar prospects to take action"
+- "Highlight positive review to reinforce quality reputation and influence potential customers"
+
+#### Behind-the-Scenes Objectives
+- "Show team expertise and process to build trust and humanize the brand"
+- "Demonstrate quality standards and attention to detail to differentiate from competitors"
+
+#### Community Engagement Objectives
+- "Connect with local community events to increase brand visibility and show local commitment"
+- "Share industry insights relevant to local market to establish thought leadership"
+
+### Objective Formatting Rules
+- Use sentence case (first word capitalized)
+- No bullet points or numbered lists
+- Write in complete sentences
+- End with appropriate punctuation
+- Avoid overly complex language
+
+### Objective Uniqueness Requirements
+- Each objective must be unique to its specific post
+- No generic objectives that could apply to multiple posts
+- Vary language and focus even for similar post types
+- Consider different aspects of the same service/product
+
+### Objective Validation Checklist
+- [ ] Clearly states the post's specific purpose
+- [ ] Identifies target audience or their needs
+- [ ] Connects to business goals
+- [ ] Specifies expected outcome or action
+- [ ] Uses clear, professional language
+- [ ] Falls within character limits
+- [ ] Is unique from other objectives in the set
+
 ## Validation Checklist for Each Post
 - [ ] Post contains 2+ business-specific identifiers
 - [ ] Uses 'you/your' to address the reader
@@ -179,6 +278,11 @@ Endows, Swift, Pleasurable/Pleasure, Avail, Outlook, Top-most/topmost, Resplende
 - [ ] Ends with terminal punctuation
 - [ ] Category accurately reflects post content and objective
 - [ ] Category follows proper formatting guidelines
+- [ ] Caption is 3-5 words in sentence case with period
+- [ ] Caption is unique and descriptive
+- [ ] Objective clearly states purpose and expected outcome
+- [ ] Objective is specific to the individual post
+- [ ] Objective aligns with business goals and target audience
 </guidelines>
 Here is the text that has been dragged in the UI to change
 <text_to_change>
@@ -190,6 +294,11 @@ Here is the main query which you need to focus on and based on that update the s
 <query>
 {query}
 </query>
+
+
+Please check very carefully which text to change and which part of text user asked which is <text_to_change>
+update only that part and return the rest of the section as it is. If they select the whole section then change it.
+So while returning back return the whole section that is updated part along with the rest of the section as it is.
 """
 
 social_post_update_prompt = ChatPromptTemplate.from_messages([

@@ -107,17 +107,17 @@ async def update_post(
     post_number: int = Form(...),
     selected_text: str = Form(...),
     user_message: str = Form(...),
-    field_type: str = Form(...),  # 'post_text' or 'category'
+    field_type: str = Form(...),  # 'post_text', 'category', 'objective', or 'caption'
 ):
     """
-    Update specific post text or category based on user input
+    Update specific post fields based on user input
 
     Args:
         set_number: The set number (1-based)
         post_number: The post number (1-based)
         selected_text: The text user selected
         user_message: The user's request for changes
-        field_type: Which field to update ('post_text' or 'category')
+        field_type: Which field to update ('post_text', 'category', 'objective', or 'caption')
     """
 
     try:
@@ -173,8 +173,14 @@ async def update_post(
         elif field_type == "category":
             social_post["posts"][post_number - 1]["Category"] = updated_value
             return_value = updated_value
+        elif field_type == "objective":
+            social_post["posts"][post_number - 1]["Objective"] = updated_value
+            return_value = updated_value
+        elif field_type == "caption":
+            social_post["posts"][post_number - 1]["Caption"] = updated_value
+            return_value = updated_value
         else:
-            # If field_type is neither, assume it's the updated value for post text
+            # If field_type is none of the above, assume it's the updated value for post text
             social_post["posts"][post_number - 1]["Post"] = updated_value
             return_value = updated_value
 

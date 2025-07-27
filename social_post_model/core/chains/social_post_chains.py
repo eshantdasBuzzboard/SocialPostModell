@@ -12,8 +12,9 @@ load_dotenv()
 
 
 class SocialPostUpdateContent(BaseModel):
-    updated_text: str = Field(
-        ..., description="Here is the updated text of the social post"
+    updated_text_along_with_old_context: str = Field(
+        ...,
+        description="Here is the updated text of the social post. It should be the updated text along with the other context from that specific section",
     )
 
 
@@ -51,7 +52,7 @@ async def update_social_post_chain(
         "website_summary": website_summary,
     }
     response = await update_chain.ainvoke(input_data)
-    return response.updated_text
+    return response.updated_text_along_with_old_context
 
 
 async def validate_query_chain(query):
