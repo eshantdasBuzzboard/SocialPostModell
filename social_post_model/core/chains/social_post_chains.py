@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 from social_post_model.core.prompts.social_post_prompts import (
     social_post_update_prompt,
     query_checker_prompt,
+    guardrails_prompt,
 )
 from typing import Any
 import json
@@ -55,10 +56,19 @@ async def update_social_post_chain(
     return response.updated_text_along_with_old_context
 
 
-async def validate_query_chain(query):
+async def validate_query_chain(query) -> Any:
     llmo = llm.with_structured_output(QueryValidator)
     query_chain = query_checker_prompt | llmo
     input_data = {"search_query_or_request": query}
     response = await query_chain.ainvoke(input_data)
+    output = json.loads(response.model_dump_json())
+    return output
+
+
+async def guardrails_check_chain(query, section) -> Any:
+    llmo = llm.with_structured_output(QueryValidator)
+    guardrails_chain = guardrails_prompt | llmo
+    input_data = {"query": query, "section": section}
+    response = await guardrails_chain.ainvoke(input_data)
     output = json.loads(response.model_dump_json())
     return output

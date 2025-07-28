@@ -4,6 +4,7 @@ from fastapi.templating import Jinja2Templates
 import logging
 import ast
 import json
+import asyncio
 import traceback
 
 import pandas as pd
@@ -11,6 +12,7 @@ import pandas as pd
 from social_post_model.core.chains.social_post_chains import (
     update_social_post_chain,
     validate_query_chain,
+    guardrails_check_chain,
 )
 
 router = APIRouter()
@@ -125,9 +127,15 @@ async def update_post(
         display_data = data[set_number - 1]
 
         # Validate the user query first
-        check_query = await validate_query_chain(user_message)
+        check_query, guardrails_check = await asyncio.gather(
+            validate_query_chain(user_message),
+            guardrails_check_chain(user_message, field_type),
+        )
         print(f"Validation score: {check_query['score']}")
         print(f"Validation reason: {check_query['reason']}")
+        print(field_type)
+        print(f"Guardrails check score: {guardrails_check['score']}")
+        print(f"Guardrails check reason: {guardrails_check['reason']}")
 
         # If validation fails (score is 0), return the reason without updating
         if check_query["score"] == 0:
@@ -136,6 +144,14 @@ async def update_post(
                 "validation_failed": True,
                 "reason": check_query["reason"],
                 "error": "Query validation failed",
+            }
+
+        elif guardrails_check["score"] == 0:
+            return {
+                "success": False,
+                "guardrails_failed": True,
+                "reason": guardrails_check["reason"],
+                "error": "Guardrails check failed",
             }
 
         # Continue with the update process if validation passes

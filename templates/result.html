@@ -918,7 +918,7 @@
         
         <!-- Text Selection Tooltip -->
         <div class="text-selection-tooltip" id="selection-tooltip">
-            🤖 Ask AI
+            🤖 Ask Zylo
         </div>
 
         <!-- AI Assistant Panel -->
@@ -1099,6 +1099,7 @@
                 
                 const result = await response.json();
                 
+                // Replace this section in your sendToAI function:
                 if (result.success) {
                     // Update the UI with new content
                     updateUIField(result.field_type, result.updated_value);
@@ -1125,6 +1126,20 @@
                             </div>
                             <div style="line-height: 1.5; color: #fcd34d;">
                                 ${result.reason || 'Your request could not be processed due to validation constraints.'}
+                            </div>
+                        </div>
+                    `;
+                    
+                } else if (result.guardrails_failed) {
+                    // Handle guardrails failure - ADD THIS NEW SECTION
+                    responseDiv.innerHTML = `
+                        <div style="color: #ef4444; background: rgba(239, 68, 68, 0.1); padding: 1rem; border-radius: 8px; border: 1px solid rgba(239, 68, 68, 0.2);">
+                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                                <span style="font-size: 1.2em;">🛡️</span>
+                                <strong>Content Policy Violation</strong>
+                            </div>
+                            <div style="line-height: 1.5; color: #fca5a5;">
+                                ${result.reason || 'Your request violates our content guidelines.'}
                             </div>
                         </div>
                     `;
