@@ -285,6 +285,12 @@ Endows, Swift, Pleasurable/Pleasure, Avail, Outlook, Top-most/topmost, Resplende
 - [ ] Objective aligns with business goals and target audience
 </guidelines>
 
+Now here are banned words and phrases which you are not supposed to use at all while generating. This needs to be strictly followed
+<banned_words_and_phrases>
+  Phrases: "running condition", "pour out your heart", "spoiled for choice", "Let the curiosity kick in", "has been acknowledged by our customers", "Do recollect", "Do _____", "With an experience", "Thinking of shifting?", "Commenced our voyage", "[Artist] is coming live", "Ensure to", "experience holder", "baseball park", "afford us another opportunity", "your anticipations"
+  Words: "Endows", "Swift", "Pleasurable", "Pleasure", "Avail", "Outlook", "Top-most", "topmost", "Resplendent", "Ardent", "Homely", "Stride", "Supremacy", "Endeavor", "Unarguably", "Fantasies", "Apt", "Vigorous", "Revel", "Ever-Ready", "Accomplice", "Abounding", "Revelation", "Escapade"
+</banned_words_and_phrases>
+
 Here is the text that has been dragged in the UI to change
 <text_to_change>
 {text_to_change}
