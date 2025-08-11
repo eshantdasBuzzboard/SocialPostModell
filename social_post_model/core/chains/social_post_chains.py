@@ -40,6 +40,7 @@ async def update_social_post_chain(
     brand_guide,
     welcome_call_details,
     website_summary,
+    length_post,
 ) -> Any:
     llms = llm.with_structured_output(SocialPostUpdateContent)
     update_chain = social_post_update_prompt | llms
@@ -51,6 +52,7 @@ async def update_social_post_chain(
         "brand_guide": brand_guide,
         "welcome_call_details": welcome_call_details,
         "website_summary": website_summary,
+        "length_post": length_post,
     }
     response = await update_chain.ainvoke(input_data)
     return response.updated_text_along_with_old_context

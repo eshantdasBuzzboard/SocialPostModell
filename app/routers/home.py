@@ -187,7 +187,7 @@ async def update_post(
 
         welcome_call_str = clean_quotes(display_data["Welcomecall Details"])
         welcome_call_details = json.loads(welcome_call_str)
-
+        length_post_length = len(specific_post)
         # Call the AI update function with the final message
         updated_value = await update_social_post_chain(
             final_message,  # Use the final_message (either original or mapped standard action)
@@ -197,6 +197,7 @@ async def update_post(
             brand_guide,
             welcome_call_details,
             website_summary,
+            length_post_length,
         )
 
         # Update the specific field in the social post

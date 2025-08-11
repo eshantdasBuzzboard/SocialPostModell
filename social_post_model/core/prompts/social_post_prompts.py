@@ -53,10 +53,6 @@ Now before changing anything make sure you follow these guidelines. Guidelines a
 Here are the guidelines
 
 <guidelines>
-## Post Content Requirements
-
-
-
 ### Voice and Language Requirements
 - Direct address using 'you/your'
 - Active voice in 80%+ sentences
@@ -77,15 +73,19 @@ Here are the guidelines
 ### CTA Requirements
 - All CTAs linked to business only
 - Clear CTAs followed by authentic links
+- Multiple unique CTAs permitted within a single post
+- Each CTA must serve a distinct purpose (e.g., website visit, contact, review)
 - Website CTA: Use website URL
 - Contact CTA: Use phone number or email URL
 - Review CTA: Use Google, Facebook, or Yelp links only if provided
 - Do not generate links independently
+- Strengthening or emphasizing existing CTAs is permitted if links remain unchanged
 
 ### Information Source Restrictions
 - Use ONLY verified information from Welcome Call, Brand Guide, or Website Content
 - No claims about services, credentials, or features not explicitly stated in provided data
 - No hallucinated facts, data, or URLs
+- Social proof and credibility markers permitted if based on verified business data
 
 ### Formatting Restrictions
 - No emojis, logos, or visual icons in post text
@@ -97,7 +97,7 @@ Here are the guidelines
 - Less than 20% similarity between any two posts
 - Each post focuses on only 1 product or service
 - No repetition of words, phrases, products, services, or business details
-- Unique CTAs for each post
+- Primary CTA focus should be unique for each post (secondary CTAs may be similar)
 
 ### Banned Content
 **Banned Words:** Endows, Swift, Pleasurable, Pleasure, Avail, Outlook, Top-most, Topmost, Resplendent, Ardent, Homely, Stride, Supremacy, Endeavor, Unarguably, Fantasies, Apt, Vigorous, Revel, Ever-Ready, Accomplice, Abounding, Revelation, Escapade, Hamper, Embark, Top-Notch
@@ -158,8 +158,10 @@ Here are the guidelines
 - Caption follows formatting rules and is unique
 - Category accurately represents post content
 - Objective clearly states post purpose and is unique
+- Multiple CTAs permitted if each serves distinct purpose
 </guidelines>
-
+There can be multiple call to actions there is no rule like there cant be something like that.
+User is adding multiple CTa but that are not definitely unique.
 Now here are banned words and phrases which you are not supposed to use at all while generating. This needs to be strictly followed
 <banned_words_and_phrases>
   Phrases: "running condition", "pour out your heart", "spoiled for choice", "Let the curiosity kick in", "has been acknowledged by our customers", "Do recollect", "Do _____", "With an experience", "Thinking of shifting?", "Commenced our voyage", "[Artist] is coming live", "Ensure to", "experience holder", "baseball park", "afford us another opportunity", "your anticipations"
@@ -176,7 +178,7 @@ Here is the main query which you need to focus on and based on that update the s
 <query>
 {query}
 </query>
-
+Current post length is {length_post}
 
 Please check very carefully which text to change and which part of text user asked which is <text_to_change>
 update only that part and return the rest of the section as it is. If they select the whole section then change it.
@@ -273,17 +275,12 @@ query_checker_prompt: ChatPromptTemplate = ChatPromptTemplate.from_messages([
     ("system", query_checker_system_prompt),
     ("human", query_checker_user_prompt),
 ])
-
 guardrails_prompt = ChatPromptTemplate.from_template(
     """You are a specialized Agent who validates if user queries comply with social media post guidelines.
 
 The user will submit a query requesting modifications or actions. You must check if the query violates any of the established guidelines for the specified section: {section}
 
 <guidelines>
-## Post Content Requirements
-
-
-
 ### Voice and Language Requirements
 - Direct address using 'you/your'
 - Active voice in 80%+ sentences
@@ -304,15 +301,19 @@ The user will submit a query requesting modifications or actions. You must check
 ### CTA Requirements
 - All CTAs linked to business only
 - Clear CTAs followed by authentic links
+- Multiple unique CTAs permitted within a single post
+- Each CTA must serve a distinct purpose (e.g., website visit, contact, review)
 - Website CTA: Use website URL
 - Contact CTA: Use phone number or email URL
 - Review CTA: Use Google, Facebook, or Yelp links only if provided
 - Do not generate links independently
+- Strengthening or emphasizing existing CTAs is permitted if links remain unchanged
 
 ### Information Source Restrictions
 - Use ONLY verified information from Welcome Call, Brand Guide, or Website Content
 - No claims about services, credentials, or features not explicitly stated in provided data
 - No hallucinated facts, data, or URLs
+- Social proof and credibility markers permitted if based on verified business data
 
 ### Formatting Restrictions
 - No emojis, logos, or visual icons in post text
@@ -324,7 +325,7 @@ The user will submit a query requesting modifications or actions. You must check
 - Less than 20% similarity between any two posts
 - Each post focuses on only 1 product or service
 - No repetition of words, phrases, products, services, or business details
-- Unique CTAs for each post
+- Primary CTA focus should be unique for each post (secondary CTAs may be similar)
 
 ### Banned Content
 **Banned Words:** Endows, Swift, Pleasurable, Pleasure, Avail, Outlook, Top-most, Topmost, Resplendent, Ardent, Homely, Stride, Supremacy, Endeavor, Unarguably, Fantasies, Apt, Vigorous, Revel, Ever-Ready, Accomplice, Abounding, Revelation, Escapade, Hamper, Embark, Top-Notch
@@ -385,6 +386,7 @@ The user will submit a query requesting modifications or actions. You must check
 - Caption follows formatting rules and is unique
 - Category accurately represents post content
 - Objective clearly states post purpose and is unique
+- Multiple CTAs permitted if each serves distinct purpose
 </guidelines>
 
 User Query: {query}
