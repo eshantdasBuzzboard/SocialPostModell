@@ -1,3 +1,4 @@
+from social_post_model.utils.constants import STANDARD_ACTION_PROMPTS
 from fastapi import APIRouter, Request, Form
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
@@ -20,7 +21,7 @@ templates = Jinja2Templates(directory="templates")
 logger = logging.getLogger(__name__)
 
 df = pd.read_excel("SocialPost.xlsx")
-columns = df.columns.to_list()
+columns: list[str] = df.columns.to_list()
 data = df[columns].to_dict(orient="records")
 
 
@@ -110,32 +111,48 @@ async def update_post(
     selected_text: str = Form(...),
     user_message: str = Form(...),
     field_type: str = Form(...),  # 'post_text', 'category', 'objective', or 'caption'
+    is_standard_action: str = Form(default="false"),  # "true" or "false"
+    action_type: str = Form(default=""),  # The standard action key if applicable
 ):
     """
-    Update specific post fields based on user input
+    Update specific post fields based on user input or standard actions
 
     Args:
         set_number: The set number (1-based)
         post_number: The post number (1-based)
         selected_text: The text user selected
-        user_message: The user's request for changes
+        user_message: The user's request for changes (or mapped standard action prompt)
         field_type: Which field to update ('post_text', 'category', 'objective', or 'caption')
+        is_standard_action: Whether this is a standard action or custom query
+        action_type: The key of the standard action if applicable
     """
 
     try:
         # Get the specific data row
         display_data = data[set_number - 1]
 
-        # Validate the user query first
+        # Handle standard actions by mapping to predefined prompts
+        final_message = user_message
+        if (
+            is_standard_action.lower() == "true"
+            and action_type in STANDARD_ACTION_PROMPTS
+        ):
+            final_message = STANDARD_ACTION_PROMPTS[action_type]
+            logger.info(f"Using standard action '{action_type}': {final_message}")
+
+        # Validate the query first
         check_query, guardrails_check = await asyncio.gather(
-            validate_query_chain(user_message),
-            guardrails_check_chain(user_message, field_type),
+            validate_query_chain(final_message),
+            guardrails_check_chain(final_message, field_type),
         )
-        print(f"Validation score: {check_query['score']}")
-        print(f"Validation reason: {check_query['reason']}")
-        print(field_type)
-        print(f"Guardrails check score: {guardrails_check['score']}")
-        print(f"Guardrails check reason: {guardrails_check['reason']}")
+
+        logger.info(f"Validation score: {check_query['score']}")
+        logger.info(f"Validation reason: {check_query['reason']}")
+        logger.info(f"Field type: {field_type}")
+        logger.info(f"Guardrails check score: {guardrails_check['score']}")
+        logger.info(f"Guardrails check reason: {guardrails_check['reason']}")
+        logger.info(f"Is standard action: {is_standard_action}")
+        logger.info(f"Action type: {action_type}")
 
         # If validation fails (score is 0), return the reason without updating
         if check_query["score"] == 0:
@@ -160,7 +177,7 @@ async def update_post(
         social_post = ast.literal_eval(social_post_str)
         specific_post = social_post["posts"][post_number - 1]
 
-        print(f"User message: {user_message}")
+        logger.info(f"Final message being processed: {final_message}")
 
         # Get additional context data
         brand_guide_str = clean_quotes(display_data["BrandGuide"])
@@ -171,9 +188,9 @@ async def update_post(
         welcome_call_str = clean_quotes(display_data["Welcomecall Details"])
         welcome_call_details = json.loads(welcome_call_str)
 
-        # Call the AI update function
+        # Call the AI update function with the final message
         updated_value = await update_social_post_chain(
-            user_message,
+            final_message,  # Use the final_message (either original or mapped standard action)
             selected_text,
             field_type,
             specific_post,
@@ -203,16 +220,82 @@ async def update_post(
         # Update the data in memory (save the entire social_post object, not just the updated_value)
         data[set_number - 1]["Social Post (9V)"] = str(social_post)
 
-        print(f"Successfully updated {field_type} with value: {return_value}")
+        action_info = (
+            f" (Standard Action: {action_type})"
+            if is_standard_action.lower() == "true"
+            else ""
+        )
+        logger.info(
+            f"Successfully updated {field_type} with value: {return_value}{action_info}"
+        )
 
         # Return the updated field value
         return {
             "success": True,
             "updated_value": return_value,
             "field_type": field_type,
+            "is_standard_action": is_standard_action.lower() == "true",
+            "action_type": action_type
+            if is_standard_action.lower() == "true"
+            else None,
         }
 
     except Exception as e:
         logger.error(f"Error updating post: {str(e)}")
+        logger.error(f"Full traceback: {traceback.format_exc()}")
+        return {"success": False, "error": str(e)}
+
+
+@router.post("/confirm_update")
+async def confirm_update(
+    set_number: int = Form(...),
+    post_number: int = Form(...),
+    field_type: str = Form(...),
+    updated_value: str = Form(...),
+):
+    """
+    Confirm and persist the updated post field to the data store
+
+    Args:
+        set_number: The set number (1-based)
+        post_number: The post number (1-based)
+        field_type: Which field was updated ('post_text', 'category', 'objective', or 'caption')
+        updated_value: The final updated value to persist
+    """
+    try:
+        # Get the specific data row
+        display_data = data[set_number - 1]
+
+        # Clean and parse social post data
+        social_post_str = clean_quotes(display_data["Social Post (9V)"])
+        social_post = ast.literal_eval(social_post_str)
+
+        # Update the specific field in the social post
+        if field_type == "post_text":
+            social_post["posts"][post_number - 1]["Post"] = updated_value
+        elif field_type == "category":
+            social_post["posts"][post_number - 1]["Category"] = updated_value
+        elif field_type == "objective":
+            social_post["posts"][post_number - 1]["Objective"] = updated_value
+        elif field_type == "caption":
+            social_post["posts"][post_number - 1]["Caption"] = updated_value
+        else:
+            # Default to post text if field_type is not recognized
+            social_post["posts"][post_number - 1]["Post"] = updated_value
+
+        # Update the data in memory
+        data[set_number - 1]["Social Post (9V)"] = str(social_post)
+
+        logger.info(f"Confirmed and persisted update for {field_type}: {updated_value}")
+
+        return {
+            "success": True,
+            "message": "Changes confirmed and saved successfully",
+            "field_type": field_type,
+            "updated_value": updated_value,
+        }
+
+    except Exception as e:
+        logger.error(f"Error confirming update: {str(e)}")
         logger.error(f"Full traceback: {traceback.format_exc()}")
         return {"success": False, "error": str(e)}

@@ -516,7 +516,7 @@
             padding: 2rem;
             transition: bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 1000;
-            max-height: 50vh;
+            max-height: 60vh;
             overflow-y: auto;
         }
 
@@ -588,6 +588,95 @@
             font-weight: 600;
         }
 
+        /* New Styles for Standard Actions */
+        .action-mode-toggle {
+            display: flex;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 4px;
+            margin-bottom: 1.5rem;
+        }
+
+        .mode-tab {
+            flex: 1;
+            background: none;
+            border: none;
+            color: #a1a1aa;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .mode-tab.active {
+            background: rgba(59, 130, 246, 0.15);
+            color: #60a5fa;
+        }
+
+        .mode-tab:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.08);
+            color: #e4e4e7;
+        }
+
+        .standard-actions {
+            display: none;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .standard-actions.active {
+            display: grid;
+        }
+
+        .action-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #e4e4e7;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .action-btn:hover {
+            background: rgba(59, 130, 246, 0.1);
+            border-color: rgba(59, 130, 246, 0.3);
+            color: #60a5fa;
+            transform: translateY(-1px);
+        }
+
+        .action-btn.selected {
+            background: rgba(59, 130, 246, 0.15);
+            border-color: rgba(59, 130, 246, 0.4);
+            color: #60a5fa;
+        }
+
+        .action-icon {
+            font-size: 16px;
+        }
+
+        .custom-input-section {
+            display: block;
+        }
+
+        .custom-input-section.hidden {
+            display: none;
+        }
+
         .ai-input-container {
             display: flex;
             gap: 12px;
@@ -640,6 +729,34 @@
             transform: none;
         }
 
+        .action-send {
+            background: linear-gradient(135deg, #10b981, #059669);
+            border: none;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: 100%;
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .action-send:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .action-send:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
         .ai-response {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.08);
@@ -649,6 +766,214 @@
             color: #e4e4e7;
             line-height: 1.6;
             font-size: 0.9rem;
+        }
+
+        .content-preview {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            margin-top: 1rem;
+            overflow: hidden;
+            display: none;
+        }
+
+        .content-preview.show {
+            display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .preview-header {
+            background: rgba(59, 130, 246, 0.1);
+            border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .preview-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #60a5fa;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .preview-close {
+            background: none;
+            border: none;
+            color: #a1a1aa;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .preview-close:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #e4e4e7;
+        }
+
+        .preview-content {
+            padding: 1.5rem;
+        }
+
+        .content-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .content-section {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 8px;
+            padding: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .content-section.original {
+            border-left: 3px solid #ef4444;
+        }
+
+        .content-section.updated {
+            border-left: 3px solid #22c55e;
+        }
+
+        .content-section-header {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .content-section.original .content-section-header {
+            color: #f87171;
+        }
+
+        .content-section.updated .content-section-header {
+            color: #4ade80;
+        }
+
+        .content-text {
+            color: #e4e4e7;
+            line-height: 1.6;
+            font-size: 0.9rem;
+            min-height: 60px;
+            max-height: 200px;
+            overflow-y: auto;
+            padding: 0.75rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .content-text::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .content-text::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .content-text::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+        }
+
+        .preview-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .preview-btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .preview-btn.cancel {
+            background: rgba(239, 68, 68, 0.1);
+            border-color: rgba(239, 68, 68, 0.3);
+            color: #f87171;
+        }
+
+        .preview-btn.cancel:hover {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: rgba(239, 68, 68, 0.5);
+            transform: translateY(-1px);
+        }
+
+        .preview-btn.confirm {
+            background: rgba(34, 197, 94, 0.1);
+            border-color: rgba(34, 197, 94, 0.3);
+            color: #4ade80;
+        }
+
+        .preview-btn.confirm:hover {
+            background: rgba(34, 197, 94, 0.2);
+            border-color: rgba(34, 197, 94, 0.5);
+            transform: translateY(-1px);
+        }
+
+        .preview-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .changes-summary {
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+            color: #c4b5fd;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .content-comparison {
+                grid-template-columns: 1fr;
+            }
+            
+            .preview-actions {
+                flex-direction: column;
+            }
+            
+            .preview-btn {
+                justify-content: center;
+            }
         }
 
         .ai-loading {
@@ -732,6 +1057,10 @@
             .panel-content {
                 max-height: none;
             }
+
+            .standard-actions {
+                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            }
         }
 
         @media (max-width: 768px) {
@@ -772,6 +1101,10 @@
             }
 
             .meta-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .standard-actions {
                 grid-template-columns: 1fr;
             }
         }
@@ -938,17 +1271,125 @@
                 <div id="selected-text-content"></div>
             </div>
             
-            <div class="ai-input-container">
-                <textarea 
-                    class="ai-input" 
-                    id="ai-input" 
-                    placeholder="Ask me anything about the selected text or social media strategy..."
-                    rows="3"
-                ></textarea>
-                <button class="ai-send" onclick="sendToAI()" id="ai-send-btn">Send</button>
+            <!-- Action Mode Toggle -->
+            <div class="action-mode-toggle">
+                <button class="mode-tab active" id="quick-actions-tab" onclick="switchMode('quick')">
+                    <span>⚡</span> Quick Actions
+                </button>
+                <button class="mode-tab" id="custom-query-tab" onclick="switchMode('custom')">
+                    <span>✏️</span> Custom Query
+                </button>
+            </div>
+
+            <!-- Standard Actions Grid -->
+            <div class="standard-actions active" id="standard-actions">
+                <button class="action-btn" onclick="selectAction('fix-language')" data-action="fix-language">
+                    <span class="action-icon">🔧</span>
+                    <span>Fix Awkward Language</span>
+                </button>
+                <button class="action-btn" onclick="selectAction('make-shorter')" data-action="make-shorter">
+                    <span class="action-icon">✂️</span>
+                    <span>Make It Shorter</span>
+                </button>
+                <button class="action-btn" onclick="selectAction('simplify')" data-action="simplify">
+                    <span class="action-icon">📝</span>
+                    <span>Simplify Language</span>
+                </button>
+                <button class="action-btn" onclick="selectAction('improve-consistency')" data-action="improve-consistency">
+                    <span class="action-icon">⚖️</span>
+                    <span>Improve Consistency</span>
+                </button>
+                <button class="action-btn" onclick="selectAction('more-salesy')" data-action="more-salesy">
+                    <span class="action-icon">💰</span>
+                    <span>Make It More Salesy</span>
+                </button>
+                <button class="action-btn" onclick="selectAction('less-salesy')" data-action="less-salesy">
+                    <span class="action-icon">🤝</span>
+                    <span>Make It Less Salesy</span>
+                </button>
+                <button class="action-btn" onclick="selectAction('add-cta')" data-action="add-cta">
+                    <span class="action-icon">📢</span>
+                    <span>Add Call-to-Action</span>
+                </button>
+                <button class="action-btn" onclick="selectAction('remove-repetitions')" data-action="remove-repetitions">
+                    <span class="action-icon">🗑️</span>
+                    <span>Remove Repetitions</span>
+                </button>
+                <button class="action-btn" onclick="selectAction('match-brand')" data-action="match-brand">
+                    <span class="action-icon">🎨</span>
+                    <span>Match Brand Voice</span>
+                </button>
+                <button class="action-btn" onclick="selectAction('fix-errors')" data-action="fix-errors">
+                    <span class="action-icon">✅</span>
+                    <span>Fix Factual Errors</span>
+                </button>
+            </div>
+
+            <!-- Execute Action Button (for standard actions) -->
+            <button class="action-send" id="action-send-btn" onclick="executeStandardAction()" style="display: none;">
+                <span>🚀</span> Apply Action
+            </button>
+
+            <!-- Custom Input Section -->
+            <div class="custom-input-section hidden" id="custom-input-section">
+                <div class="ai-input-container">
+                    <textarea 
+                        class="ai-input" 
+                        id="ai-input" 
+                        placeholder="Ask me anything about the selected text or social media strategy..."
+                        rows="3"
+                    ></textarea>
+                    <button class="ai-send" onclick="sendToAI()" id="ai-send-btn">Send</button>
+                </div>
             </div>
             
             <div class="ai-response" id="ai-response" style="display: none;"></div>
+            
+            <!-- Content Preview Section -->
+            <div class="content-preview" id="content-preview">
+                <div class="preview-header">
+                    <div class="preview-title">
+                        <span>🔍</span>
+                        <span>Preview Changes</span>
+                    </div>
+                    <button class="preview-close" onclick="closePreview()">×</button>
+                </div>
+                <div class="preview-content">
+                    <div class="changes-summary" id="changes-summary">
+                        <span>📝</span>
+                        <span id="changes-summary-text"></span>
+                    </div>
+                    
+                    <div class="content-comparison">
+                        <div class="content-section original">
+                            <div class="content-section-header">
+                                <span>📄</span>
+                                <span>Original Content</span>
+                            </div>
+                            <div class="content-text" id="original-content"></div>
+                        </div>
+                        
+                        <div class="content-section updated">
+                            <div class="content-section-header">
+                                <span>✨</span>
+                                <span>Updated Content</span>
+                            </div>
+                            <div class="content-text" id="updated-content"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="preview-actions">
+                        <button class="preview-btn cancel" onclick="cancelChanges()">
+                            <span>❌</span>
+                            <span>Cancel</span>
+                        </button>
+                        <button class="preview-btn confirm" onclick="confirmChanges()" id="confirm-btn">
+                            <span>✅</span>
+                            <span>Apply Changes</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -987,6 +1428,23 @@
         let selectedText = '';
         let lastSelection = null;
         let currentFieldType = '';
+        let currentMode = 'quick'; // 'quick' or 'custom'
+        let selectedAction = null;
+        let pendingUpdate = null; // Store pending update data
+
+        // Standard action mappings
+        const standardActions = {
+            'fix-language': 'Fix any awkward or unclear language in this text to make it more natural and professional.',
+            'make-shorter': 'Make this text more concise and shorter while keeping the key message and impact.',
+            'simplify': 'Simplify the language to make it easier to understand for a broader audience.',
+            'improve-consistency': 'Improve the consistency of tone, style, and messaging throughout this text.',
+            'more-salesy': 'Make this text more persuasive and sales-oriented to drive action and conversions.',
+            'less-salesy': 'Make this text less sales-focused and more informational or relationship-building.',
+            'add-cta': 'Add or improve the call-to-action to make it more compelling and actionable.',
+            'remove-repetitions': 'Remove any repetitive content or redundant phrases to make the text cleaner.',
+            'match-brand': 'Adjust the tone and style to better match our brand voice and personality.',
+            'fix-errors': 'Review and fix any factual errors, typos, or inaccuracies in this content.'
+        };
 
         // Field type mappings with user-friendly names
         const fieldMappings = {
@@ -1011,6 +1469,55 @@
                 icon: '💬'
             }
         };
+
+        // Mode switching functionality
+        function switchMode(mode) {
+            currentMode = mode;
+            selectedAction = null; // Reset selected action when switching modes
+            
+            // Update tab states
+            document.getElementById('quick-actions-tab').classList.toggle('active', mode === 'quick');
+            document.getElementById('custom-query-tab').classList.toggle('active', mode === 'custom');
+            
+            // Show/hide sections
+            document.getElementById('standard-actions').classList.toggle('active', mode === 'quick');
+            document.getElementById('custom-input-section').classList.toggle('hidden', mode === 'quick');
+            document.getElementById('action-send-btn').style.display = 'none';
+            
+            // Clear any selected actions
+            document.querySelectorAll('.action-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            
+            // Hide response if switching modes
+            document.getElementById('ai-response').style.display = 'none';
+        }
+
+        // Standard action selection
+        function selectAction(actionKey) {
+            selectedAction = actionKey;
+            
+            // Update button states
+            document.querySelectorAll('.action-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            
+            document.querySelector(`[data-action="${actionKey}"]`).classList.add('selected');
+            
+            // Show execute button
+            document.getElementById('action-send-btn').style.display = 'flex';
+            
+            // Hide previous response
+            document.getElementById('ai-response').style.display = 'none';
+        }
+
+        // Execute standard action
+        async function executeStandardAction() {
+            if (!selectedAction || !selectedText) return;
+            
+            const actionMessage = standardActions[selectedAction];
+            await processAIRequest(actionMessage, true);
+        }
 
         // Text Selection and AI Assistant Functions
         function showSelectionTooltip(x, y) {
@@ -1042,7 +1549,7 @@
             document.getElementById('selected-text-content').textContent = text;
             document.getElementById('selected-text-display').style.display = 'block';
             
-            // Update placeholder based on field type
+            // Update placeholder based on field type (for custom mode)
             const input = document.getElementById('ai-input');
             const placeholders = {
                 'category': 'How would you like to modify this category? (e.g., "Make it more engaging" or "Change to a different category type")',
@@ -1052,8 +1559,10 @@
             };
             input.placeholder = placeholders[fieldType] || 'How would you like to modify this content?';
             
+            // Reset mode to quick actions by default
+            switchMode('quick');
+            
             document.getElementById('ai-assistant').classList.add('active');
-            input.focus();
             hideSelectionTooltip();
         }
 
@@ -1062,24 +1571,45 @@
             document.getElementById('ai-response').style.display = 'none';
             document.getElementById('ai-input').value = '';
             document.getElementById('field-info').style.display = 'none';
+            document.getElementById('action-send-btn').style.display = 'none';
+            
+            // Close preview if open
+            closePreview();
+            
+            // Reset selections
             selectedText = '';
             currentFieldType = '';
+            selectedAction = null;
+            pendingUpdate = null;
+            
+            // Clear selected actions
+            document.querySelectorAll('.action-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            
             hideSelectionTooltip();
         }
 
-        // Enhanced sendToAI function with field-specific handling
+        // Enhanced sendToAI function (for custom queries)
         async function sendToAI() {
             const input = document.getElementById('ai-input');
             const message = input.value.trim();
             
             if (!message) return;
             
-            const sendBtn = document.getElementById('ai-send-btn');
+            await processAIRequest(message, false);
+            input.value = '';
+        }
+
+        // Unified AI request processing
+        async function processAIRequest(message, isStandardAction) {
+            const sendBtn = isStandardAction ? document.getElementById('action-send-btn') : document.getElementById('ai-send-btn');
             const responseDiv = document.getElementById('ai-response');
             
             // Show loading state
             sendBtn.disabled = true;
-            sendBtn.textContent = 'Processing...';
+            const originalText = sendBtn.textContent;
+            sendBtn.textContent = isStandardAction ? 'Processing...' : 'Processing...';
             responseDiv.style.display = 'block';
             responseDiv.innerHTML = '<div class="ai-loading">AI is processing your request...</div>';
             
@@ -1091,6 +1621,10 @@
                 formData.append('selected_text', selectedText);
                 formData.append('user_message', message);
                 formData.append('field_type', currentFieldType);
+                formData.append('is_standard_action', isStandardAction ? 'true' : 'false');
+                if (isStandardAction) {
+                    formData.append('action_type', selectedAction);
+                }
                 
                 const response = await fetch('/update_post', {
                     method: 'POST',
@@ -1099,22 +1633,25 @@
                 
                 const result = await response.json();
                 
-                // Replace this section in your sendToAI function:
                 if (result.success) {
-                    // Update the UI with new content
-                    updateUIField(result.field_type, result.updated_value);
+                    // Store the pending update and show preview
+                    pendingUpdate = {
+                        fieldType: result.field_type,
+                        updatedValue: result.updated_value,
+                        originalValue: selectedText,
+                        isStandardAction: isStandardAction,
+                        actionType: selectedAction,
+                        message: message
+                    };
                     
-                    const fieldInfo = fieldMappings[result.field_type];
+                    showPreview(pendingUpdate);
+                    
+                    // Hide loading and show success message
                     responseDiv.innerHTML = `
-                        <div style="color: #34d399;">
-                            ✅ Successfully updated! The <strong>${fieldInfo.name}</strong> has been refreshed with your changes.
+                        <div style="color: #60a5fa; text-align: center;">
+                            ✨ Changes ready for review. Please check the preview above.
                         </div>
                     `;
-                    
-                    // Close AI panel after 2 seconds
-                    setTimeout(() => {
-                        closeAI();
-                    }, 2000);
                     
                 } else if (result.validation_failed) {
                     // Handle validation failure
@@ -1131,7 +1668,7 @@
                     `;
                     
                 } else if (result.guardrails_failed) {
-                    // Handle guardrails failure - ADD THIS NEW SECTION
+                    // Handle guardrails failure
                     responseDiv.innerHTML = `
                         <div style="color: #ef4444; background: rgba(239, 68, 68, 0.1); padding: 1rem; border-radius: 8px; border: 1px solid rgba(239, 68, 68, 0.2);">
                             <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
@@ -1174,21 +1711,103 @@
                 `;
             } finally {
                 sendBtn.disabled = false;
-                sendBtn.textContent = 'Send';
-                input.value = '';
+                sendBtn.textContent = originalText;
             }
         }
 
-        // Determine which field to update based on selected text location
-        function determineFieldType() {
-            const selection = window.getSelection();
-            if (selection.anchorNode) {
-                const editable = selection.anchorNode.parentElement.closest('.editable-field');
-                if (editable) {
-                    return editable.getAttribute('data-field') || 'post_text';
+        // Show preview of changes
+        function showPreview(updateData) {
+            const preview = document.getElementById('content-preview');
+            const summaryText = document.getElementById('changes-summary-text');
+            const originalContent = document.getElementById('original-content');
+            const updatedContent = document.getElementById('updated-content');
+            
+            // Update summary
+            const fieldInfo = fieldMappings[updateData.fieldType];
+            const actionText = updateData.isStandardAction ? 
+                `"${document.querySelector(`[data-action="${updateData.actionType}"]`).textContent.trim()}"` : 
+                'your custom request';
+            
+            summaryText.textContent = `Applied ${actionText} to ${fieldInfo.name}`;
+            
+            // Update content comparison
+            originalContent.textContent = updateData.originalValue;
+            updatedContent.textContent = updateData.updatedValue;
+            
+            // Show preview
+            preview.classList.add('show');
+        }
+
+        // Close preview without applying changes
+        function closePreview() {
+            document.getElementById('content-preview').classList.remove('show');
+            pendingUpdate = null;
+        }
+
+        // Cancel changes
+        function cancelChanges() {
+            closePreview();
+            document.getElementById('ai-response').innerHTML = `
+                <div style="color: #a1a1aa; text-align: center;">
+                    Changes cancelled. You can try again with different options.
+                </div>
+            `;
+        }
+
+        // Confirm and apply changes
+        async function confirmChanges() {
+            if (!pendingUpdate) return;
+            
+            const confirmBtn = document.getElementById('confirm-btn');
+            confirmBtn.disabled = true;
+            confirmBtn.innerHTML = '<span>⏳</span><span>Applying...</span>';
+            
+            try {
+                // Apply the changes to the UI
+                updateUIField(pendingUpdate.fieldType, pendingUpdate.updatedValue);
+                
+                // Send confirmation to backend to persist changes
+                const formData = new FormData();
+                formData.append('set_number', {{ set_number }});
+                formData.append('post_number', {{ post_number }});
+                formData.append('field_type', pendingUpdate.fieldType);
+                formData.append('updated_value', pendingUpdate.updatedValue);
+                
+                const response = await fetch('/confirm_update', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (response.ok) {
+                    // Show success message
+                    document.getElementById('ai-response').innerHTML = `
+                        <div style="color: #34d399; text-align: center;">
+                            ✅ Changes applied successfully!
+                        </div>
+                    `;
+                    
+                    // Close preview and AI panel after delay
+                    setTimeout(() => {
+                        closePreview();
+                        setTimeout(() => {
+                            closeAI();
+                        }, 1000);
+                    }, 1500);
+                } else {
+                    throw new Error('Failed to confirm changes');
                 }
+                
+            } catch (error) {
+                console.error('Error confirming changes:', error);
+                document.getElementById('ai-response').innerHTML = `
+                    <div style="color: #ef4444; text-align: center;">
+                        ❌ Failed to apply changes. Please try again.
+                    </div>
+                `;
+            } finally {
+                confirmBtn.disabled = false;
+                confirmBtn.innerHTML = '<span>✅</span><span>Apply Changes</span>';
             }
-            return 'post_text';
         }
 
         // Update the UI field with new content and animations
@@ -1282,7 +1901,11 @@
             }
             
             if (e.ctrlKey && e.key === 'Enter' && document.getElementById('ai-assistant').classList.contains('active')) {
-                sendToAI();
+                if (currentMode === 'custom') {
+                    sendToAI();
+                } else if (selectedAction) {
+                    executeStandardAction();
+                }
             }
         });
 
