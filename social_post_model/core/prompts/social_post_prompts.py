@@ -51,238 +51,113 @@ Here is the section which are going to focus
 
 Now before changing anything make sure you follow these guidelines. Guidelines are very important . 
 Here are the guidelines
-<guidelines>
-# Post Content, Category, Caption, and Objective Guidelines
 
+<guidelines>
 ## Post Content Requirements
 
-### Character Limits
-- **Minimum**: Post length - 25 characters (including 2 hashtags)
-- **Maximum**: Post length - 280 characters (including 2 hashtags)
-- Must strictly adhere to character count range
 
-### Opening Requirements
-1. Each post must begin with a clear, specific, emotionally engaging statement of customer results/benefits
-2. NO "Imagine," "Picture," or scenario-building introductions
-3. Focus on end outcomes as statements of fact or change
 
-### Content Structure
-1. **80 percent of every post** must describe benefits, outcomes, or emotional rewards
-2. Mention product/service features **only** in direct connection to customer benefits
-3. Keep benefit as the focus, integrate features within benefit statements
-4. Every sentence must answer: "How does this make the customer's life better, easier, happier, or more successful?"
-5. Include powerful, action-oriented closing that urges readers to claim benefits
-6. All post content must end with terminal punctuation (period, exclamation mark, question mark, dash, or semicolon)
-
-### Language and Tone
-- Native American language with local dialect for purely local businesses
-- Direct address using **'you/your'**
-- **Active voice in 80 percent + sentences**
-- **Reading level: 8th-10th grade**
+### Voice and Language Requirements
+- Direct address using 'you/your'
+- Active voice in 80%+ sentences
+- Reading level: 8th-10th grade
 - Zero industry jargon without explanation
-- Personalized content that connects with readers
-- Draft like a human - no robotic or redundant language
+- All content must end with terminal punctuation
+
+### Hashtag Requirements
+- Minimum 2 hashtags required from provided list
+- Hashtags included in character count
+
+### Business Specificity Requirements
+- 2+ unique business identifiers (only if present in provided data)
+- 1 specific differentiator from competitors
+- Named products/services with specific details from provided data only
+- Business name appears in no more than 3 post contents
+
+### CTA Requirements
+- All CTAs linked to business only
+- Clear CTAs followed by authentic links
+- Website CTA: Use website URL
+- Contact CTA: Use phone number or email URL
+- Review CTA: Use Google, Facebook, or Yelp links only if provided
+- Do not generate links independently
+
+### Information Source Restrictions
+- Use ONLY verified information from Welcome Call, Brand Guide, or Website Content
+- No claims about services, credentials, or features not explicitly stated in provided data
+- No hallucinated facts, data, or URLs
 
 ### Formatting Restrictions
-- **No dashes or hyphens** anywhere in posts
 - No emojis, logos, or visual icons in post text
 - No ASCII art or special characters for decoration
 - Clean text only
-- Format in US Standards
+- US Standard formatting
 
-### Hashtag Requirements
-- Each post must contain **at least 2 hashtags** from provided list
-- Hashtags are included in character count
-
-### Business Specificity Requirements
-- **2+ unique business identifiers** per post (only if present in provided data)
-- **1 specific differentiator** from competitors (focus on USP)
-- Named products/services with specific details from provided data only
-- **Business name appears in no more than 3 post contents** across the set
-
-### Content Uniqueness
-- **Less than 20 percent similarity** between any two posts
-- No repetition within category or current set
-- Each post must focus on **only 1 product or service**
-- Use different data for each post from provided sources
-- Change structure: different opening hooks, middle development, conclusions
-- Use synonyms for key terms, vary sentence patterns
-- No similarity to past posts (check opening, middle, CTA separately)
-
-### Information Sources
-- Use **ONLY** verified information from Welcome Call, Brand Guide, Website Content, or Past Published Posts
-- **NO** claims about services, credentials, or features not explicitly stated in provided data
-- **NO** hallucinated facts, data, or URLs
-
-### Call-to-Action Requirements
-- All CTAs must be linked to the business (no external site redirects)
-- Clear CTAs followed by authentic links (**don't generate links on your own**)
-- Website CTA: Use website URL instead of specific product link
-- Contact CTA: Use phone number or email URL
-- Review CTA: Use Google, Facebook, or Yelp links **only if provided**
+### Content Uniqueness Requirements
+- Less than 20% similarity between any two posts
+- Each post focuses on only 1 product or service
+- No repetition of words, phrases, products, services, or business details
 - Unique CTAs for each post
 
 ### Banned Content
+**Banned Words:** Endows, Swift, Pleasurable, Pleasure, Avail, Outlook, Top-most, Topmost, Resplendent, Ardent, Homely, Stride, Supremacy, Endeavor, Unarguably, Fantasies, Apt, Vigorous, Revel, Ever-Ready, Accomplice, Abounding, Revelation, Escapade, Hamper, Embark, Top-Notch
 
-#### Banned Words:
-Endows, Swift, Pleasurable/Pleasure, Avail, Outlook, Top-most/topmost, Resplendent, Ardent, Homely, Stride, Supremacy, Endeavor, Unarguably, Fantasies, Apt, Vigorous, Revel, Ever-Ready, Accomplice, Abounding, Revelation, Escapade, Hamper, Embark, Top-Notch
+**Banned Phrases:** Running condition, Pour out your heart, Spoiled for choice, Let the curiosity kick in, Has been acknowledged by our customers, Do recollect, Do _____, With an experience, Thinking of shifting?, Commenced our voyage, [Artist] is coming live, Ensure to, Experience holder, Baseball park, Afford us another opportunity, Your anticipations, Key features here
 
-#### Banned Phrases:
-- Running condition
-- Pour out your heart
-- Spoiled for choice
-- Let the curiosity kick in
-- Has been acknowledged by our customers
-- Do recollect
-- Do _____
-- With an experience
-- Thinking of shifting?
-- Commenced our voyage
-- [Artist] is coming live
-- Ensure to
-- Experience holder
-- Baseball park
-- Afford us another opportunity
-- Your anticipations
-- Key features here
+## Image Requirements
+- Three descriptive concepts per post (10+ words each)
+- Show specific business elements (location, team, actual products)
+- No generic stock photo descriptions
+- Include recognizable local/business elements
 
-## Category Guidelines
+## Compliance Requirements
+### HIPAA Compliance (Healthcare businesses)
+- No patient identification language
+- No personal information of reviewers
+- No medical history discussion
+- No medical advice provision
+- State HIPAA restrictions when necessary
 
-### Category Format
-- **Clear, descriptive category names** that reflect the post's primary focus
-- Use **title case** (capitalize each major word)
-- Categories should be **5-40 characters** in length
-- Must accurately represent the post content and objective
+### Industry-Specific Compliance
+- Healthcare: HIPAA guidelines
+- Real Estate: Fair housing compliance, no discriminatory language
+- Food Service: No unverified health claims, accurate pricing
+- All industries: Only verifiable, factual claims
 
-### Category Examples
-- "Market Insights- Local Market Updates"
-- "Customer Success Stories"
-- "Educational Content- Home Buying Tips"
-- "Service Spotlight- Property Valuation"
-- "Community Events"
-- "Industry News and Trends"
-
-### Category Requirements
-- Categories must align with business objectives and target audience
-- Should be consistent across similar post types
-- Must reflect the actual content and purpose of the post
-- Categories should help organize content themes for strategic posting
-
-## Caption Guidelines
-
-### Caption Length and Structure
-- **Character limit**: 3-5 words maximum
-- **Format**: Sentence case (first word capitalized, rest lowercase unless proper nouns)
-- **Punctuation**: Must end with a period
-- **Style**: Clean, concise, and descriptive
-
-### Caption Content Requirements
-1. **Descriptive Focus**: Caption should summarize the main theme or action of the post
-2. **Brand Alignment**: Must reflect the brand voice and tone
-3. **Clarity**: Should be immediately understandable without context
-4. **Relevance**: Must directly relate to the post content and image
-
-### Caption Formatting Rules
+## Caption Requirements
+- Must end with a period
+- Descriptive and summarizes main theme of post
 - No emojis or special characters
 - No hashtags in captions
 - No branded terminology unless essential
-- Avoid industry jargon
-- Use simple, everyday language
+- Caption should be 3 to 5 words maximum
+- Each caption must be unique across post set
 
-### Caption Examples
-**Good Captions:**
-- "Fresh market finds."
-- "Team training day."
-- "Customer success story."
-- "New service launch."
-- "Behind the scenes."
+## Category Requirements
+- Clear, descriptive category names
+- Must accurately represent post content and objective
+- Should align with business objectives and target audience
 
-**Bad Captions:**
-- "AMAZING RESULTS!!!"
-- "Check this out 🔥"
-- "Top-notch service delivery"
-- "Revolutionizing the industry"
-
-### Caption Uniqueness Requirements
-- No repeated captions across the post set
-- Each caption must be unique even for similar post types
-- Vary descriptive words and phrases
-- Consider different angles of the same topic
-
-## Objective Guidelines
-
-### Objective Structure and Format
-- **Length**: 10-50 words maximum
-- **Clarity**: Must clearly state the post's purpose and expected outcome
-- **Specificity**: Should be specific to the individual post, not generic
-- **Measurability**: Include implied metrics or outcomes where possible
-
-### Objective Content Requirements
-1. **Purpose Clarity**: Clearly state what the post aims to achieve
-2. **Audience Focus**: Specify the target audience or their needs
-3. **Business Alignment**: Connect to broader business goals
-4. **Action Orientation**: Include what action or response is expected
-
-### Objective Categories and Examples
-
-#### Educational Content Objectives
-- "Educate homebuyers about the mortgage pre-approval process to build trust and position as expert advisor"
-- "Share seasonal home maintenance tips to demonstrate ongoing value and encourage service bookings"
-
-#### Promotional Content Objectives
-- "Showcase new service offering to drive inquiries and highlight competitive advantages"
-- "Promote limited-time offer to create urgency and generate immediate leads"
-
-#### Social Proof Objectives
-- "Share customer success story to build credibility and encourage similar prospects to take action"
-- "Highlight positive review to reinforce quality reputation and influence potential customers"
-
-#### Behind-the-Scenes Objectives
-- "Show team expertise and process to build trust and humanize the brand"
-- "Demonstrate quality standards and attention to detail to differentiate from competitors"
-
-#### Community Engagement Objectives
-- "Connect with local community events to increase brand visibility and show local commitment"
-- "Share industry insights relevant to local market to establish thought leadership"
-
-### Objective Formatting Rules
-- Use sentence case (first word capitalized)
-- No bullet points or numbered lists
-- Write in complete sentences
+## Objective Requirements
+- Must clearly state post's purpose and expected outcome
+- Specific to individual post, not generic
+- Include implied metrics or outcomes where possible
+- Use sentence case
 - End with appropriate punctuation
-- Avoid overly complex language
+- Each objective must be unique
 
-### Objective Uniqueness Requirements
-- Each objective must be unique to its specific post
-- No generic objectives that could apply to multiple posts
-- Vary language and focus even for similar post types
-- Consider different aspects of the same service/product
-
-### Objective Validation Checklist
-- [ ] Clearly states the post's specific purpose
-- [ ] Identifies target audience or their needs
-- [ ] Connects to business goals
-- [ ] Specifies expected outcome or action
-- [ ] Uses clear, professional language
-- [ ] Falls within character limits
-- [ ] Is unique from other objectives in the set
-
-## Validation Checklist for Each Post
-- [ ] Post contains 2+ business-specific identifiers
-- [ ] Uses 'you/your' to address the reader
-- [ ] Includes valid URLs from provided data only
-- [ ] No banned words/phrases used
-- [ ] No similarity to past posts
-- [ ] Information only from provided sources
-- [ ] Character count within specified range
-- [ ] Ends with terminal punctuation
-- [ ] Category accurately reflects post content and objective
-- [ ] Category follows proper formatting guidelines
-- [ ] Caption is 3-5 words in sentence case with period
-- [ ] Caption is unique and descriptive
-- [ ] Objective clearly states purpose and expected outcome
-- [ ] Objective is specific to the individual post
-- [ ] Objective aligns with business goals and target audience
+## Validation Checklist
+- Contains required business identifiers
+- Uses 'you/your' addressing
+- Includes valid URLs from provided data only
+- No banned words/phrases used
+- Within character limits
+- Ends with terminal punctuation
+- Information only from verified sources
+- Unique content structure and elements
+- Caption follows formatting rules and is unique
+- Category accurately represents post content
+- Objective clearly states post purpose and is unique
 </guidelines>
 
 Now here are banned words and phrases which you are not supposed to use at all while generating. This needs to be strictly followed
@@ -399,313 +274,127 @@ query_checker_prompt: ChatPromptTemplate = ChatPromptTemplate.from_messages([
     ("human", query_checker_user_prompt),
 ])
 
-
 guardrails_prompt = ChatPromptTemplate.from_template(
-    """You are a specialised Agent who checks if some guidelines are being followed or not. 
-User will enter a  query and there he or she will be requesting something. Now whatever the user queries the user is not allowed to violate the guidelines.
-Here are the guidelines which is supposed to be followed. Basically you need to check if the query does not violate any of the guidelines for a specific section.
-Here are the guidelines
-<guidelines>
-# Post Content, Category, Caption, and Objective Guidelines
+    """You are a specialized Agent who validates if user queries comply with social media post guidelines.
 
+The user will submit a query requesting modifications or actions. You must check if the query violates any of the established guidelines for the specified section: {section}
+
+<guidelines>
 ## Post Content Requirements
 
-### Character Limits
-- **Minimum**: Post length - 25 characters (including 2 hashtags)
-- **Maximum**: Post length - 280 characters (including 2 hashtags)
-- Must strictly adhere to character count range
 
-### Opening Requirements
-1. Each post must begin with a clear, specific, emotionally engaging statement of customer results/benefits
-2. NO "Imagine," "Picture," or scenario-building introductions
-3. Focus on end outcomes as statements of fact or change
 
-### Content Structure
-1. **80 percent of every post** must describe benefits, outcomes, or emotional rewards
-2. Mention product/service features **only** in direct connection to customer benefits
-3. Keep benefit as the focus, integrate features within benefit statements
-4. Every sentence must answer: "How does this make the customer's life better, easier, happier, or more successful?"
-5. Include powerful, action-oriented closing that urges readers to claim benefits
-6. All post content must end with terminal punctuation (period, exclamation mark, question mark, dash, or semicolon)
-
-### Language and Tone
-- Native American language with local dialect for purely local businesses
-- Direct address using **'you/your'**
-- **Active voice in 80 percent + sentences**
-- **Reading level: 8th-10th grade**
+### Voice and Language Requirements
+- Direct address using 'you/your'
+- Active voice in 80%+ sentences
+- Reading level: 8th-10th grade
 - Zero industry jargon without explanation
-- Personalized content that connects with readers
-- Draft like a human - no robotic or redundant language
+- All content must end with terminal punctuation
+
+### Hashtag Requirements
+- Minimum 2 hashtags required from provided list
+- Hashtags included in character count
+
+### Business Specificity Requirements
+- 2+ unique business identifiers (only if present in provided data)
+- 1 specific differentiator from competitors
+- Named products/services with specific details from provided data only
+- Business name appears in no more than 3 post contents
+
+### CTA Requirements
+- All CTAs linked to business only
+- Clear CTAs followed by authentic links
+- Website CTA: Use website URL
+- Contact CTA: Use phone number or email URL
+- Review CTA: Use Google, Facebook, or Yelp links only if provided
+- Do not generate links independently
+
+### Information Source Restrictions
+- Use ONLY verified information from Welcome Call, Brand Guide, or Website Content
+- No claims about services, credentials, or features not explicitly stated in provided data
+- No hallucinated facts, data, or URLs
 
 ### Formatting Restrictions
-- **No dashes or hyphens** anywhere in posts
 - No emojis, logos, or visual icons in post text
 - No ASCII art or special characters for decoration
 - Clean text only
-- Format in US Standards
+- US Standard formatting
 
-### Hashtag Requirements
-- Each post must contain **at least 2 hashtags** from provided list
-- Hashtags are included in character count
-
-### Business Specificity Requirements
-- **2+ unique business identifiers** per post (only if present in provided data)
-- **1 specific differentiator** from competitors (focus on USP)
-- Named products/services with specific details from provided data only
-- **Business name appears in no more than 3 post contents** across the set
-
-### Content Uniqueness
-- **Less than 20 percent similarity** between any two posts
-- No repetition within category or current set
-- Each post must focus on **only 1 product or service**
-- Use different data for each post from provided sources
-- Change structure: different opening hooks, middle development, conclusions
-- Use synonyms for key terms, vary sentence patterns
-- No similarity to past posts (check opening, middle, CTA separately)
-
-### Information Sources
-- Use **ONLY** verified information from Welcome Call, Brand Guide, Website Content, or Past Published Posts
-- **NO** claims about services, credentials, or features not explicitly stated in provided data
-- **NO** hallucinated facts, data, or URLs
-
-### Call-to-Action Requirements
-- All CTAs must be linked to the business (no external site redirects)
-- Clear CTAs followed by authentic links (**don't generate links on your own**)
-- Website CTA: Use website URL instead of specific product link
-- Contact CTA: Use phone number or email URL
-- Review CTA: Use Google, Facebook, or Yelp links **only if provided**
+### Content Uniqueness Requirements
+- Less than 20% similarity between any two posts
+- Each post focuses on only 1 product or service
+- No repetition of words, phrases, products, services, or business details
 - Unique CTAs for each post
 
 ### Banned Content
+**Banned Words:** Endows, Swift, Pleasurable, Pleasure, Avail, Outlook, Top-most, Topmost, Resplendent, Ardent, Homely, Stride, Supremacy, Endeavor, Unarguably, Fantasies, Apt, Vigorous, Revel, Ever-Ready, Accomplice, Abounding, Revelation, Escapade, Hamper, Embark, Top-Notch
 
-#### Banned Words:
-Endows, Swift, Pleasurable/Pleasure, Avail, Outlook, Top-most/topmost, Resplendent, Ardent, Homely, Stride, Supremacy, Endeavor, Unarguably, Fantasies, Apt, Vigorous, Revel, Ever-Ready, Accomplice, Abounding, Revelation, Escapade, Hamper, Embark, Top-Notch
+**Banned Phrases:** Running condition, Pour out your heart, Spoiled for choice, Let the curiosity kick in, Has been acknowledged by our customers, Do recollect, Do _____, With an experience, Thinking of shifting?, Commenced our voyage, [Artist] is coming live, Ensure to, Experience holder, Baseball park, Afford us another opportunity, Your anticipations, Key features here
 
-#### Banned Phrases:
-- Running condition
-- Pour out your heart
-- Spoiled for choice
-- Let the curiosity kick in
-- Has been acknowledged by our customers
-- Do recollect
-- Do _____
-- With an experience
-- Thinking of shifting?
-- Commenced our voyage
-- [Artist] is coming live
-- Ensure to
-- Experience holder
-- Baseball park
-- Afford us another opportunity
-- Your anticipations
-- Key features here
+## Image Requirements
+- Three descriptive concepts per post (10+ words each)
+- Show specific business elements (location, team, actual products)
+- No generic stock photo descriptions
+- Include recognizable local/business elements
 
-## Category Guidelines
+## Compliance Requirements
+### HIPAA Compliance (Healthcare businesses)
+- No patient identification language
+- No personal information of reviewers
+- No medical history discussion
+- No medical advice provision
+- State HIPAA restrictions when necessary
 
-### Category Format
-- **Clear, descriptive category names** that reflect the post's primary focus
-- Use **title case** (capitalize each major word)
-- Categories should be **5-40 characters** in length
-- Must accurately represent the post content and objective
+### Industry-Specific Compliance
+- Healthcare: HIPAA guidelines
+- Real Estate: Fair housing compliance, no discriminatory language
+- Food Service: No unverified health claims, accurate pricing
+- All industries: Only verifiable, factual claims
 
-### Category Examples
-- "Market Insights- Local Market Updates"
-- "Customer Success Stories"
-- "Educational Content- Home Buying Tips"
-- "Service Spotlight- Property Valuation"
-- "Community Events"
-- "Industry News and Trends"
-
-### Category Requirements
-- Categories must align with business objectives and target audience
-- Should be consistent across similar post types
-- Must reflect the actual content and purpose of the post
-- Categories should help organize content themes for strategic posting
-
-## Caption Guidelines
-
-### Caption Length and Structure
-- **Character limit**: 3-5 words maximum
-- **Format**: Sentence case (first word capitalized, rest lowercase unless proper nouns)
-- **Punctuation**: Must end with a period
-- **Style**: Clean, concise, and descriptive
-
-### Caption Content Requirements
-1. **Descriptive Focus**: Caption should summarize the main theme or action of the post
-2. **Brand Alignment**: Must reflect the brand voice and tone
-3. **Clarity**: Should be immediately understandable without context
-4. **Relevance**: Must directly relate to the post content and image
-
-### Caption Formatting Rules
+## Caption Requirements
+- Must end with a period
+- Descriptive and summarizes main theme of post
 - No emojis or special characters
 - No hashtags in captions
 - No branded terminology unless essential
-- Avoid industry jargon
-- Use simple, everyday language
+- Caption should be 3 to 5 words maximum
+- Each caption must be unique across post set
 
-### Caption Examples
-**Good Captions:**
-- "Fresh market finds."
-- "Team training day."
-- "Customer success story."
-- "New service launch."
-- "Behind the scenes."
+## Category Requirements
+- Clear, descriptive category names
+- Must accurately represent post content and objective
+- Should align with business objectives and target audience
 
-**Bad Captions:**
-- "AMAZING RESULTS!!!"
-- "Check this out 🔥"
-- "Top-notch service delivery"
-- "Revolutionizing the industry"
-
-### Caption Uniqueness Requirements
-- No repeated captions across the post set
-- Each caption must be unique even for similar post types
-- Vary descriptive words and phrases
-- Consider different angles of the same topic
-
-## Objective Guidelines
-
-### Objective Structure and Format
-- **Length**: 10-50 words maximum
-- **Clarity**: Must clearly state the post's purpose and expected outcome
-- **Specificity**: Should be specific to the individual post, not generic
-- **Measurability**: Include implied metrics or outcomes where possible
-
-### Objective Content Requirements
-1. **Purpose Clarity**: Clearly state what the post aims to achieve
-2. **Audience Focus**: Specify the target audience or their needs
-3. **Business Alignment**: Connect to broader business goals
-4. **Action Orientation**: Include what action or response is expected
-
-### Objective Categories and Examples
-
-#### Educational Content Objectives
-- "Educate homebuyers about the mortgage pre-approval process to build trust and position as expert advisor"
-- "Share seasonal home maintenance tips to demonstrate ongoing value and encourage service bookings"
-
-#### Promotional Content Objectives
-- "Showcase new service offering to drive inquiries and highlight competitive advantages"
-- "Promote limited-time offer to create urgency and generate immediate leads"
-
-#### Social Proof Objectives
-- "Share customer success story to build credibility and encourage similar prospects to take action"
-- "Highlight positive review to reinforce quality reputation and influence potential customers"
-
-#### Behind-the-Scenes Objectives
-- "Show team expertise and process to build trust and humanize the brand"
-- "Demonstrate quality standards and attention to detail to differentiate from competitors"
-
-#### Community Engagement Objectives
-- "Connect with local community events to increase brand visibility and show local commitment"
-- "Share industry insights relevant to local market to establish thought leadership"
-
-### Objective Formatting Rules
-- Use sentence case (first word capitalized)
-- No bullet points or numbered lists
-- Write in complete sentences
+## Objective Requirements
+- Must clearly state post's purpose and expected outcome
+- Specific to individual post, not generic
+- Include implied metrics or outcomes where possible
+- Use sentence case
 - End with appropriate punctuation
-- Avoid overly complex language
+- Each objective must be unique
 
-### Objective Uniqueness Requirements
-- Each objective must be unique to its specific post
-- No generic objectives that could apply to multiple posts
-- Vary language and focus even for similar post types
-- Consider different aspects of the same service/product
-
-### Objective Validation Checklist
-- [ ] Clearly states the post's specific purpose
-- [ ] Identifies target audience or their needs
-- [ ] Connects to business goals
-- [ ] Specifies expected outcome or action
-- [ ] Uses clear, professional language
-- [ ] Falls within character limits
-- [ ] Is unique from other objectives in the set
-
-## Validation Checklist for Each Post
-- [ ] Post contains 2+ business-specific identifiers
-- [ ] Uses 'you/your' to address the reader
-- [ ] Includes valid URLs from provided data only
-- [ ] No banned words/phrases used
-- [ ] No similarity to past posts
-- [ ] Information only from provided sources
-- [ ] Character count within specified range
-- [ ] Ends with terminal punctuation
-- [ ] Category accurately reflects post content and objective
-- [ ] Category follows proper formatting guidelines
-- [ ] Caption is 3-5 words in sentence case with period
-- [ ] Caption is unique and descriptive
-- [ ] Objective clearly states purpose and expected outcome
-- [ ] Objective is specific to the individual post
-- [ ] Objective aligns with business goals and target audience
+## Validation Checklist
+- Contains required business identifiers
+- Uses 'you/your' addressing
+- Includes valid URLs from provided data only
+- No banned words/phrases used
+- Within character limits
+- Ends with terminal punctuation
+- Information only from verified sources
+- Unique content structure and elements
+- Caption follows formatting rules and is unique
+- Category accurately represents post content
+- Objective clearly states post purpose and is unique
 </guidelines>
 
+User Query: {query}
 
-Now all you eed to check if the query does not violate any guidelines
-User is allowed to ask generic questions for example;
-1. Can you rephraase this part
-2. Can you change this part
-3. Can you modify this part
-Make sure these re just examples for you to do the reasoning behind how you are validating the query or request.
+Validation Rules:
+- Return score 1 if query is valid
+- Return score 0 if query violates guidelines
+- If score is 0, provide a 2-3 line reason explaining the specific guideline violation
+- If score is 1, return empty string "" for reason
 
-Now here are queries which should not be allowed 
-<invalid requests>
-Caption Guideline Violations:
-
-"Create a caption with 8-10 words" (violates 3-5 word limit)
-"Make a caption without a period at the end" (violates punctuation requirement)
-"Write a caption in ALL CAPS" (violates sentence case requirement)
-"Add some emojis to make the caption more engaging 🔥✨" (violates no emoji rule)
-"Create a caption with #hashtags included" (violates no hashtags in captions rule)
-
-Post Content Guideline Violations:
-
-"Write a 15-word post" (violates 25-character minimum)
-"Create a 400-character post with hashtags" (violates 280-character maximum)
-"Start the post with 'Imagine walking into your dream home...'" (violates banned opening requirement)
-"Use dashes and hyphens throughout the post for emphasis" (violates formatting restrictions)
-"Add some emojis and visual icons to make it pop ✨🏠" (violates formatting restrictions)
-"Include the business name 5 times in this post" (violates business name frequency limit)
-"Write about 3 different services in one post" (violates one product/service per post rule)
-
-Language and Content Violations:
-
-"Use the banned word 'top-notch' in the post" (violates banned words list)
-"Include the phrase 'spoiled for choice' somewhere" (violates banned phrases list)
-"Write at a college reading level with complex terminology" (violates 8th-10th grade reading level)
-"Make up some customer statistics since we don't have data" (violates information sources requirement)
-"Create a fake testimonial to make it sound better" (violates verified information only rule)
-
-Hashtag Guideline Violations:
-
-"Write a post with only 1 hashtag" (violates minimum 2 hashtags requirement)
-"Don't count the hashtags in the character limit" (violates character count inclusion rule)
-
-Objective Guideline Violations:
-
-"Write a 60-word objective" (violates 10-50 word limit)
-"Make the objective really generic so it works for any post" (violates specificity requirement)
-"Write the objective in bullet points" (violates formatting rules)
-
-Category Guideline Violations:
-
-"Create a 3-character category name" (violates 5-40 character range)
-"Make a category with 50 characters" (violates 5-40 character range)
-"Write the category in all lowercase" (violates title case requirement)
-</invalid requests>
-Now again these are just examples for you to do the reasoning behind how you are validating the query or request.
-
-
-Here is the section which you will be looking into: {section}
-
-Here is the query which you need to check if it is right or not
-<query>
-{query}
-</query>
-Now if you thing the query is valid then you need to return a score 1
-If the query is invalid you need to return the score 0
-If the score is 0 then you need to return a reason why this request or query is invalid
-if the score is 1 then you can return "" empty string like this in the reason section.
-In case the query fails then please dont give a huge response back. Give a 2 or 3 line reason exactly to the point why it failed.
-In the reason please mention the specific reason why the guidelines has failed like the specific reason.
+Analyze the query against the guidelines for section {section} and return your validation score and reason.
 """
 )
