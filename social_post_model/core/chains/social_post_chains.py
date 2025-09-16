@@ -2,10 +2,13 @@ from langchain_openai import ChatOpenAI
 from pydantic import BaseModel, Field
 from dotenv import load_dotenv
 from social_post_model.core.prompts.social_post_prompts import (
-    social_post_update_prompt,
     query_checker_prompt,
     guardrails_prompt,
 )
+from social_post_model.core.prompts.social_posts_update_prompts import (
+    social_post_update_prompt,
+)
+from social_post_model.utils.constants import formal_langauge_restrictions
 from typing import Any
 import json
 
@@ -53,6 +56,7 @@ async def update_social_post_chain(
         "welcome_call_details": welcome_call_details,
         "website_summary": website_summary,
         "length_post": length_post,
+        "formal_langauge_restrictions": formal_langauge_restrictions,
     }
     response = await update_chain.ainvoke(input_data)
     return response.updated_text_along_with_old_context
@@ -70,7 +74,11 @@ async def validate_query_chain(query) -> Any:
 async def guardrails_check_chain(query, section) -> Any:
     llmo = llm.with_structured_output(QueryValidator)
     guardrails_chain = guardrails_prompt | llmo
-    input_data = {"query": query, "section": section}
+    input_data = {
+        "query": query,
+        "section": section,
+        "formal_langauge_restrictions": formal_langauge_restrictions,
+    }
     response = await guardrails_chain.ainvoke(input_data)
     output = json.loads(response.model_dump_json())
     return output
