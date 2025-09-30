@@ -189,21 +189,6 @@ async def update_post(
         welcome_call_details = json.loads(welcome_call_str)
         length_post_length = len(specific_post)
 
-        params_to_log = {
-            "query": final_message,
-            "text_to_change": selected_text,
-            "section": field_type,
-            "current_output": specific_post,
-            "brand_guide": brand_guide,
-            "welcome_call_details": welcome_call_details,
-            "website_summary": website_summary,
-            "length_post": length_post_length,
-        }
-
-        # Log in JSON format
-        logger.info(
-            f"update_social_post_chain parameters: {json.dumps(params_to_log, indent=2, ensure_ascii=False)}"
-        )
         # Call the AI update function with the final message
         updated_value = await update_social_post_chain(
             query=final_message,  # Use the final_message (either original or mapped standard action)
