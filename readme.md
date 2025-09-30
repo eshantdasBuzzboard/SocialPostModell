@@ -113,35 +113,90 @@ The system includes pre-defined optimized queries for common editing tasks. Thes
 
 ### Available Standard Actions
 
-**fix-language**
-Improves natural flow and readability by replacing unnatural phrasing and awkward constructions.
+#### **fix-language**
+Improves the natural flow and readability of content by:
+- Identifying and replacing awkward phrasing with smooth, conversational language
+- Restructuring sentences that sound robotic or artificial
+- Eliminating repetitive words or phrases that appear too close together
+- Maintaining the original meaning and length while enhancing readability
 
-**make-shorter**
-Reduces content by 20-30% while preserving all critical information and key messaging.
+#### **make-shorter**
+Reduces content length by 20-30% while preserving all essential information:
+- Removes unnecessary filler words and redundant qualifiers
+- Consolidates duplicate concepts expressed in different ways
+- Eliminates wordy introductions and verbose explanations
+- Cuts redundant descriptive elements while keeping key details
 
-**simplify**
-Replaces technical jargon and complex vocabulary with accessible, everyday language.
+#### **simplify**
+Makes content more accessible to a broader audience by:
+- Replacing technical jargon with everyday language
+- Breaking complex sentences into shorter, clearer statements
+- Converting passive voice to active voice where appropriate
+- Using simpler vocabulary while maintaining professionalism
+- Keeping within 10% of the original word count
 
-**improve-consistency**
-Establishes uniform terminology, tone, and messaging across posts for brand coherence.
+#### **improve-consistency**
+Creates unified messaging across content by:
+- Establishing consistent terminology and key phrases
+- Standardizing tone and communication style per brand guidelines
+- Resolving any contradictory statements or conflicting information
+- Ensuring logical flow between related content pieces
+- Maintaining exact original character count
 
-**more-salesy**
-Adds compelling benefit-focused language and strengthens calls-to-action without being pushy.
+#### **more-salesy**
+Enhances persuasive elements without being pushy by:
+- Adding benefit-focused language that emphasizes outcomes and value
+- Including strategic urgency elements that motivate action
+- Highlighting unique selling points and competitive advantages
+- Incorporating credibility markers and social proof
+- Strengthening calls-to-action throughout the content
+- Using only verified business information from provided sources
+- Maintaining exact original character count
 
-**less-salesy**
-Removes aggressive promotional language and transforms content into educational, value-driven messaging.
+#### **less-salesy**
+Transforms promotional content into educational, relationship-building material by:
+- Removing aggressive sales language and pushy tactics
+- Converting product-focused messaging to value-driven content
+- Establishing a helpful, consultative tone
+- Leading with educational insights before commercial mentions
+- Replacing hard-sell approaches with natural recommendations
+- Maintaining exact original character count
 
-**add-cta**
-Inserts clear action steps and contact information with compelling urgency elements.
+#### **add-cta**
+Inserts clear action steps and engagement opportunities by:
+- Adding specific instructions that guide readers toward desired actions
+- Including verified contact information and engagement pathways
+- Creating compelling urgency or valuable incentives
+- Making next steps obvious and easily accessible
+- Providing multiple engagement options for different preferences
+- Using only business information provided in source materials
+- Maintaining exact original character count
 
-**remove-repetitions**
-Identifies and consolidates duplicate information and redundant messaging.
+#### **remove-repetitions**
+Eliminates redundancy while preserving content richness by:
+- Identifying and consolidating duplicate information or concepts
+- Removing redundant examples that don't add new insights
+- Eliminating circular reasoning patterns
+- Preserving content variety while removing true repetition
+- Maintaining all essential information in streamlined format
 
-**match-brand**
-Applies brand-specific vocabulary, tone, and communication patterns from brand guidelines.
+#### **match-brand**
+Aligns content with established brand identity by:
+- Applying brand-specific vocabulary and signature phrases
+- Adjusting tone and formality to match brand guidelines
+- Ensuring consistent point of view and narrative perspective
+- Integrating brand's preferred emotional tone and energy level
+- Using documented voice and tone standards from brand guide
+- Maintaining exact original character count
 
-**fix-errors**
-Verifies and corrects factual information against provided business documentation.
+#### **fix-errors**
+Verifies and corrects all factual information by:
+- Cross-referencing statistics and claims against provided documentation
+- Removing unverified or unsupported statements
+- Validating company information against business documentation
+- Replacing inaccuracies with properly sourced information
+- Ensuring pricing and promotional details reflect current status
+- Using only information from Welcome Call, Brand Guide, and Website Summary
 
 ### Using Standard Actions
 
