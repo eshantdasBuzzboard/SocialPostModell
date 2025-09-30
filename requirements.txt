@@ -1,12 +1,12 @@
 python-dotenv
 langchain
 langchain_openai
-pandas
-openpyxl
+# pandas
+# openpyxl
 
 
-fastapi
-uvicorn
-jinja2
-python-multipart
-pydantic
+# fastapi
+# uvicorn
+# jinja2
+# python-multipart
+# pydantic
