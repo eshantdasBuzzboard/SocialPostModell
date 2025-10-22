@@ -9,7 +9,8 @@ brand guide, website summary, welcome call details and the social post content.
 
  You will also be given the text to  update and the section you need to update.
  So the user will drag some piece of text and send that to you for changing it . Focus mostly on that piece of text which the user has dragged which is supposed to get altered
-
+Make sure if user would ask to add cta then it should be towards the end. It cannot be towards the start.
+In case user asks to add a phone number or you are adding on your own then the format is (XXX) XXX-XXXX,
 You need to highly focus on the query requested by the user and based on that you need to update the 
 current website page output. So you will also be given the current social post content and based on that you need to update it
 in whatever the user is requesting in his or her query and you need to update it accordingly pretty well.
@@ -17,6 +18,7 @@ Just update the section they are mentioning.
 So now all you need to do is highly focus on the query which the user sends and generate or update or remove or add
 the section of the website content which the user is asking considering the additional details like brand guide, website summary, welcome call details and the social post content.
 Highly focus on the query and the text to be updated requested by the user.
+
 """
 
 social_post_update_user_prompt = """
@@ -34,6 +36,9 @@ Here is your brand_guide
 <brand_guide>
 {brand_guide}
 </brand_guide>
+Here are the hastags and imeplentation guidelines which are already part of welcome call details
+hastags: {hashtags}
+implementaion_guidelines: {implementation_guidelines}
 
 Here is the output of the website page which you need to update and return in the same json structure 
 as it is

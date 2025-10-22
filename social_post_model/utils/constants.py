@@ -48,6 +48,7 @@ CTA should Create compelling urgency or valuable incentives that motivate immedi
 Make the next logical step obvious and easily accessible, removing friction and barriers that might prevent reader engagement
 Develop multiple engagement options and response mechanisms to accommodate different reader preferences and comfort levels with taking action
 Maintain original Content length of  character exactly same as that.
+Make sure cta is always added towards the end of the section and not in the middle of it. It is compulsory.
 """,
     "remove-repetitions": """Conduct thorough analysis to identify information, concepts, or points that are presented multiple times in different formats throughout the content
 Consolidate duplicate messaging into single, comprehensive statements that maintain all essential information while eliminating redundancy
@@ -67,6 +68,21 @@ Identify and remove unverified claims, unsupported statements, and assertions th
 Verify all company-specific information, product details, service descriptions, and organizational facts against provided business information documentation
 Replace identified inaccuracies with properly sourced information that maintains content integrity and credibility only through Welcome call, BrandGuide, Website content .
 Ensure all pricing information, promotional offers, availability claims, and time-sensitive details reflect current, accurate status and remain legally compliant and sourced ONLY through information provided to you
+""",
+    "standardize-mobile": """Identify all phone numbers, mobile numbers, and contact numbers throughout the content in their various existing formats
+Convert all identified numbers to the standardized format: (XXX) XXX-XXXX, ensuring consistent presentation across all content
+Apply uniform formatting with parentheses around the area code, space after closing parenthesis, and hyphen between the third and fourth digits of the local number
+Ensure all contact numbers maintain clickability and proper formatting for different platforms (web, mobile, print) while preserving readability
+Verify all standardized numbers match actual business contact information from Welcome call, Brand Guide, or Website content to prevent formatting errors that could break valid contact details
+Maintain original Content length of character exactly same as that.
+""",
+    "optimize-hashtags": """Perform comprehensive review of all hashtags used in the content against the official hashtags list provided in Brand Guide and Implementation Guidelines
+Identify and flag any hashtags that are not part of the approved hashtags list for removal or replacement with authorized alternatives
+Verify that approved hashtags from the guidelines have been properly implemented and are being used consistently across the content
+Ensure hashtag placement, spacing, and formatting follows best practices and brand standards as specified in Implementation Guidelines
+Add missing strategic hashtags from the approved list that are relevant to the content topic and would enhance discoverability and reach
+Validate hashtag relevance to ensure all included hashtags align with content theme, target audience, and marketing objectives
+Maintain original Content length of character exactly same as that.
 """,
 }
 

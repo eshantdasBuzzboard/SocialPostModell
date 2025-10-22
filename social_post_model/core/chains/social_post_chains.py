@@ -45,6 +45,8 @@ async def update_social_post_chain(
     website_summary,
     length_post,
 ) -> Any:
+    hashtags = welcome_call_details.get("hashtags")
+    ig = welcome_call_details.get("implementationGuidelines")
     llms = llm.with_structured_output(SocialPostUpdateContent)
     update_chain = social_post_update_prompt | llms
     input_data = {
@@ -57,6 +59,8 @@ async def update_social_post_chain(
         "website_summary": website_summary,
         "length_post": length_post,
         "formal_langauge_restrictions": formal_langauge_restrictions,
+        "hashtags": hashtags,
+        "implementation_guidelines": ig,
     }
     response = await update_chain.ainvoke(input_data)
     return response.updated_text_along_with_old_context
