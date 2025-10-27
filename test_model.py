@@ -144,7 +144,7 @@ welcome_call_details = {
         "#LifeTransitionRealEstate",
     ],
     "imageGuidelines": [""],
-    "implementationGuidelines": [""],
+    "implementationGuidelines": ["Please dont use #yolo"],
     "logo": {
         "url": "https://img1.wsimg.com/blobby/go/66005c03-e4fa-4410-b06b-2cae4c76a8c0/1744072064810_1744007908332_Spiritual_20Sanctu.png",
         "guidelines": "Your primary logo will appear in posts that utilize the custom backgrounds we've designed for you.",

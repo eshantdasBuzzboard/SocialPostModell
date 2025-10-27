@@ -6,6 +6,8 @@ A Python-based AI system for intelligent social media post updates with built-in
 
 The Social Post Model provides developers with a simple interface to validate and update social media post content using AI. The system includes comprehensive guardrails to ensure content updates meet brand guidelines and social media best practices before processing.
 
+> **Note:** This repository may contain other directories such as `templates` and `app`. Please ignore those directories. The AI models and core functionality are located exclusively in the `social_post_model` directory.
+
 ## Features
 
 - **Guardrails Validation**: Automated checks to ensure content updates comply with brand guidelines and social media standards
@@ -171,6 +173,7 @@ Inserts clear action steps and engagement opportunities by:
 - Providing multiple engagement options for different preferences
 - Using only business information provided in source materials
 - Maintaining exact original character count
+- Always adding CTA towards the end of the section (compulsory)
 
 #### **remove-repetitions**
 Eliminates redundancy while preserving content richness by:
@@ -197,6 +200,25 @@ Verifies and corrects all factual information by:
 - Replacing inaccuracies with properly sourced information
 - Ensuring pricing and promotional details reflect current status
 - Using only information from Welcome Call, Brand Guide, and Website Summary
+
+#### **standardize-mobile**
+Standardizes phone number formatting across all content by:
+- Identifying all phone numbers, mobile numbers, and contact numbers in various existing formats
+- Converting all numbers to the standardized format: (XXX) XXX-XXXX
+- Applying uniform formatting with parentheses around area code, space after closing parenthesis, and hyphen between third and fourth digits
+- Ensuring all contact numbers maintain clickability and proper formatting for different platforms (web, mobile, print)
+- Verifying all standardized numbers match actual business contact information from Welcome call, Brand Guide, or Website content
+- Maintaining exact original character count
+
+#### **optimize-hashtags**
+Reviews and optimizes hashtag usage based on brand guidelines by:
+- Performing comprehensive review of all hashtags against the official hashtags list in Brand Guide and Implementation Guidelines
+- Identifying and flagging any hashtags not part of the approved list for removal or replacement
+- Verifying approved hashtags have been properly implemented and used consistently
+- Ensuring hashtag placement, spacing, and formatting follows best practices and brand standards
+- Adding missing strategic hashtags from the approved list that are relevant to content topic
+- Validating hashtag relevance to ensure alignment with content theme, target audience, and marketing objectives
+- Maintaining exact original character count
 
 ### Using Standard Actions
 
