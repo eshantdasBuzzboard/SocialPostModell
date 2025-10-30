@@ -84,6 +84,29 @@ Add missing strategic hashtags from the approved list that are relevant to the c
 Validate hashtag relevance to ensure all included hashtags align with content theme, target audience, and marketing objectives
 Maintain original Content length of character exactly same as that.
 """,
+    "check-banned-words": """Go through the detailed sets of banned words and formal words provided in the Brand Guide and Implementation Guidelines. 
+Carefully identify if any of these banned or formal words exist in the selected content.
+If banned or formal words are found:
+- Remove them completely
+- Rephrase the sentences naturally to maintain meaning and flow
+- Replace with appropriate, conversational alternatives that align with brand voice
+- Return the new updated output with all changes applied
+If there are no banned words or formal words found:
+- Return back the same content exactly as it is without any modifications
+- Do not make unnecessary changes to content that is already compliant
+Maintain original content length of character exactly same as that.
+""",
+    "focus-product": """Go through the <website_summary> very carefully and thoroughly.
+Analyze the primary services and secondary services sections within the website summary in detail.
+Identify all the individual products/services listed under both primary and secondary offerings.
+After analyzing that well, pick out any ONE specific product or service that best aligns with the post objective and target audience.
+Rewrite the content to be specific to ONLY that one selected product/service from the primary or secondary services section.
+Make sure the content describes and focuses exclusively on this single product/service and nothing else.
+Do not divert attention to any other products, services, or offerings mentioned in the website summary.
+Remove or replace any mentions of multiple products/services to maintain singular focus throughout.
+Strengthen the messaging around this one product/service with specific benefits, features, and value propositions.
+Maintain original content length of character exactly same as that.
+""",
 }
 
 

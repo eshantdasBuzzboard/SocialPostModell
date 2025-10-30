@@ -130,7 +130,7 @@ async def update_post(
     try:
         # Get the specific data row
         display_data = data[set_number - 1]
-
+        logger.info(f"Testing action {action_type}")
         # Handle standard actions by mapping to predefined prompts
         final_message = user_message
         if (
